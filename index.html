@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0"> 
+    <meta name="description" content="Social Media and Internet Marketing Services for Businesses">
+    <meta name="keywords" content="Social Media, Internet Marketing, SEO, PPC, Branding, Business Growth, Business Dashboard">
+    <meta name="author" content="Your Name or Company">
+    <title>Social Media & Internet Marketing</title>
+    
+    <!-- Internal Styles -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #007bff; /* Blue Background */
+            color: white;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #0056b3; /* Darker Blue color */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Contact Info in the Header */
+        .contact-info {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        header h1 {
+            margin: 40px 0 10px 0;
+            font-size: 36px;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        /* Icons for WhatsApp */
+        .contact-icons {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-icons a {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .contact-icons a:hover {
+            color: #f7b731;
+        }
+
+        .contact-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #444;
+            overflow: hidden;
+        }
+
+        nav a {
+            color: white;
+            float: left;
+            padding: 14px 20px;
+            text-align: center;
+            text-decoration: none;
+            width: 25%;
+            box-sizing: border-box;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        /* Sections Styles */
+        section {
+            padding: 30px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 8px;
+            color: black;
+        }
+
+        section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        section p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .service-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 8px;
+            width: 30%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .service-item h3 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Call to Action Button */
+        .cta-button {
+            background-color: red; /* Default red color */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold; /* Bold text */
+        }
+
+        .cta-button:hover {
+            background-color: darkred; /* Darker red on hover */
+        }
+
+        .cta-button.green {
+            background-color: green; /* Green color after submission */
+        }
+
+        .cta-button.green:hover {
+            background-color: darkgreen;
+        }
+
+        /* Comment Section */
+        .comment-section {
+            background-color: #f1f1f1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .comment-section h3 {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .comment-section textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .comment-section button {
+            background-color: red; /* Default red color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comment-section button:hover {
+            background-color: darkred;
+        }
+
+        /* Contact Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        form input, form textarea {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        form button {
+            background-color: red; /* Default red color */
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: darkred;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer .social-links {
+            margin-top: 10px;
+        }
+
+        footer .social-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        footer .social-links a:hover {
+            color: #f7b731;
+        }
+
+        /* Modal for Demo Videos */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 400px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            color: white;
+            background-color: transparent;
+            border: none;
+        }
+
+        /* Direct Contact Section */
+        .direct-contact {
+            background-color: #f1f1f1;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .direct-contact h3 {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .direct-contact .contact-option {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .direct-contact .contact-option:hover {
+            background-color: #0056b3;
+        }
+
+        /* Logo and Image Section */
+        .logo-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo-section img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <img src="image/logo.jpeg" width="200" height="250" alt="Logo">
+        <div class="contact-info">
+            <a href="tel:+923472740080">Phone: 0347-2740080</a>
+            <a href="mailto:onlyforw910@gmail.com">Email: onlyforw910@gmail.com</a>
+        </div>
+
+        <!-- WhatsApp Icon Only -->
+        <div class="contact-icons">
+            <a href="https://wa.me/923472740080" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            </a>
+            <p>Click on WhatsApp</p>
+        </div>
+
+        <h1>Social Media & Internet Marketing</h1>
+        <p>We help grow your brand online through innovative strategies</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Logo Section -->
+    <section class="logo-section">
+        <img src="image/logo.png" alt="Logo"> <!-- Replace with your actual logo -->
+        <img src="image1.jpg" alt="Service 1"> <!-- Replace with actual image -->
+        <img src="image2.jpg" alt="Service 2"> <!-- Replace with actual image -->
+    </section>
+
+    <!-- Demo Button Section -->
+    <section id="demo">
+        <button class="cta-button" onclick="openModal()">Watch Our Demo</button>
+    </section>
+
+    <!-- Modal for Demo Videos -->
+    <div class="modal" id="demoModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <h2>Our Demo Videos</h2>
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="services">
+            <div class="service-item">
+                <h3>Social Media Management</h3>
+                <p>Manage your social media presence across all platforms. We help create engaging content, interact with followers, and build your brand’s presence online.</p>
+            </div>
+            <div class="service-item">
+                <h3>SEO (Search Engine Optimization)</h3>
+                <p>Optimize your website for search engines to increase visibility and drive organic traffic. Our team uses proven SEO techniques that improve rankings and attract targeted visitors.</p>
+            </div>
+            <div class="service-item">
+                <h3>PPC Advertising</h3>
+                <p>Run paid ads on Google, Facebook, and other platforms to attract immediate traffic. We create optimized campaigns that deliver high ROI.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Interested in working with us? Get in touch with our team today!</p>
+        <form action="#" method="POST">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit" id="submit-btn" class="cta-button" onclick="submitMessage(event)">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Feedback Section moved to the end -->
+    <section class="comment-section">
+        <h3>Leave Your Feedback</h3>
+        <textarea id="comment" rows="4" placeholder="Write your comment here..."></textarea>
+        <button id="comment-btn" class="cta-button" onclick="submitComment()">Submit Comment</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Social Media & Internet Marketing</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Demo Modal and Button Actions -->
+    <script>
+        // Open the modal
+        function openModal() {
+            document.getElementById("demoModal").style.display = "flex";
+        }
+
+        // Close the modal
+        function closeModal() {
+            document.getElementById("demoModal").style.display = "none";
+        }
+
+        // Function to simulate submitting a comment
+        function submitComment() {
+            let commentBtn = document.getElementById("comment-btn");
+            commentBtn.classList.add("green");
+            commentBtn.innerText = "Thank you for your comment!";
+        }
+
+        // Function to simulate sending a message
+        function submitMessage(event) {
+            event.preventDefault();
+            let submitBtn = document.getElementById("submit-btn");
+            submitBtn.classList.add("green");
+            submitBtn.innerText = "Thank you for your message!";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Header Section */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+/* Section Styling */
+section {
+    padding: 40px 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* About Section */
+#about p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-image {
+    width: 200px;
+    height: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Gallery Section */
+#gallery .gallery-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#gallery .gallery-item {
+    width: 30%;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#gallery .gallery-item:hover {
+    transform: scale(1.05);
+}
+
+#gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Services Section */
+#services ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#services ul li {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Contact Section */
+#contact form {
+    display: block;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+#contact input, 
+#contact textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#contact button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#contact button:hover {
+    background-color: #555;
+}
+
+#messageResult {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+/* Profile Image Styling */
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* Makes the image round */
+    display: block;
+    margin: 20px auto; /* Centers the image */
+}
+
+/* Gallery Image Styling */
+.gallery-item {
+    width: 30%;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.gallery-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+img {
+    width: 100%;  /* Makes the image responsive */
+    height: auto; /* Keeps the aspect ratio intact */
+  }
+  my-website-project/
+│
+├── index.html       (Your main HTML file)
+├── styles.css       (Your CSS file)
+└── images/          (Folder for your images)
+    └── image1.png   (Your PNG image file)
