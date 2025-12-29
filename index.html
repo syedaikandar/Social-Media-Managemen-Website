@@ -1,471 +1,1414 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="digitalSolutionsApp" ng-strict-di>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewpoint" content="width=device-width, initial-scale=1.0"> 
-    <meta name="description" content="Social Media and Internet Marketing Services for Businesses">
-    <meta name="keywords" content="Social Media, Internet Marketing, SEO, PPC, Branding, Business Growth, Business Dashboard">
-    <meta name="author" content="Your Name or Company">
-    <title>Social Media & Internet Marketing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transform your business with Digital Solutions. Professional digital marketing, web development, SEO optimization, e-commerce solutions, social media management, and data analytics services.">
+    <meta name="keywords" content="digital marketing, web development, SEO, e-commerce, social media, data analytics, digital transformation">
+    <meta name="author" content="Digital Solutions">
+    <meta property="og:title" content="Digital Solutions | Professional Digital Services">
+    <meta property="og:description" content="Transform your business with comprehensive digital solutions that drive growth and maximize ROI.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
     
-    <!-- Internal Styles -->
+    <title>Digital Solutions | Transform Your Business Digitally</title>
+    
+    <!-- AngularJS Core -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-touch.min.js"></script>
+    
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
     <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #06b6d4;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #ffffff;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light-gray: #f9fafb;
+            --border: #e5e7eb;
+            
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+            --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --gradient-dark: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            --gradient-overlay: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9));
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 6px 12px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            --radius-sm: 0.375rem;
+            --radius: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #007bff; /* Blue Background */
-            color: white;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: #0056b3; /* Darker Blue color */
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            position: relative;
-        }
-
-        /* Contact Info in the Header */
-        .contact-info {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .contact-info a {
-            color: white;
-            text-decoration: none;
-            margin-right: 15px;
-        }
-
-        header h1 {
-            margin: 40px 0 10px 0;
-            font-size: 36px;
-        }
-
-        header p {
-            font-size: 18px;
-            margin-top: 5px;
-        }
-
-        /* Icons for WhatsApp */
-        .contact-icons {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .contact-icons a {
-            color: white;
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-decoration: none;
-        }
-
-        .contact-icons a:hover {
-            color: #f7b731;
-        }
-
-        .contact-icons img {
-            width: 30px;
-            height: 30px;
-        }
-
-        /* Navigation Bar */
-        nav {
-            background-color: #444;
-            overflow: hidden;
-        }
-
-        nav a {
-            color: white;
-            float: left;
-            padding: 14px 20px;
-            text-align: center;
-            text-decoration: none;
-            width: 25%;
             box-sizing: border-box;
         }
 
-        nav a:hover {
-            background-color: #555;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* Sections Styles */
-        section {
-            padding: 30px;
-            margin: 20px;
-            background-color: white;
-            border-radius: 8px;
-            color: black;
-        }
-
-        section h2 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        section p {
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
             font-size: 16px;
-            line-height: 1.6;
         }
 
-        /* Services Section */
-        .services {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
         }
 
-        .service-item {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 15px;
-            border-radius: 8px;
-            width: 30%;
-            text-align: center;
-            box-sizing: border-box;
-        }
-
-        .service-item h3 {
-            font-size: 24px;
-            color: #333;
-        }
-
-        /* Call to Action Button */
-        .cta-button {
-            background-color: red; /* Default red color */
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            text-align: center;
-            margin-top: 20px;
-            font-weight: bold; /* Bold text */
-        }
-
-        .cta-button:hover {
-            background-color: darkred; /* Darker red on hover */
-        }
-
-        .cta-button.green {
-            background-color: green; /* Green color after submission */
-        }
-
-        .cta-button.green:hover {
-            background-color: darkgreen;
-        }
-
-        /* Comment Section */
-        .comment-section {
-            background-color: #f1f1f1;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-
-        .comment-section h3 {
-            margin-bottom: 10px;
-            font-size: 24px;
-            color: #333;
-        }
-
-        .comment-section textarea {
+        .container {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            font-size: 16px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        .comment-section button {
-            background-color: red; /* Default red color */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .section {
+            padding: 5rem 0;
         }
 
-        .comment-section button:hover {
-            background-color: darkred;
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-        /* Contact Form */
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 50%;
+        .section-title h2 {
+            font-size: 2.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.125rem;
+            max-width: 48rem;
             margin: 0 auto;
         }
 
-        form input, form textarea {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        form button {
-            background-color: red; /* Default red color */
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        form button:hover {
-            background-color: darkred;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        footer .social-links {
-            margin-top: 10px;
-        }
-
-        footer .social-links a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-
-        footer .social-links a:hover {
-            color: #f7b731;
-        }
-
-        /* Modal for Demo Videos */
-        .modal {
-            display: none;
+        /* Header Styles */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--gradient-primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
             justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.125rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--light-gray);
+        }
+
+        /* Hero Section with Beautiful Background */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--gradient-overlay),
+                        url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.2));
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 48rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .services-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 2rem 0;
+        }
+
+        .service-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
+        }
+
+        .service-tag:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Services Section with Background Image */
+        .services {
+            background: linear-gradient(rgba(249, 250, 251, 0.95), rgba(249, 250, 251, 0.95)),
+                        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .services:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.05), rgba(6, 182, 212, 0.05));
+            z-index: 0;
+        }
+
+        .services .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            background: white;
+        }
+
+        .service-icon {
+            width: 4rem;
+            height: 4rem;
+            background: var(--gradient-primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
         }
 
-        .modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 80%;
-            max-height: 80%;
-            overflow: auto;
+        .about-image {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            position: relative;
         }
 
-        .modal-content iframe {
+        .about-image:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(6, 182, 212, 0.1));
+            z-index: 1;
+        }
+
+        .about-image img {
             width: 100%;
             height: 400px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition-slow);
         }
 
-        .close-btn {
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Portfolio Section with Background */
+        .portfolio {
+            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)),
+                        url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            position: relative;
+        }
+
+        .portfolio:before {
+            content: '';
             position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 30px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            z-index: 0;
+        }
+
+        .portfolio .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio .section-title h2 {
+            background: linear-gradient(to right, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Contact Section with Beautiful Background */
+        .contact {
+            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)),
+                        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
-            background-color: transparent;
-            border: none;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Direct Contact Section */
-        .direct-contact {
-            background-color: #f1f1f1;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 8px;
+        .contact:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.2));
+            z-index: 0;
         }
 
-        .direct-contact h3 {
-            margin-bottom: 10px;
-            font-size: 24px;
-            color: #333;
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .direct-contact .contact-option {
-            background-color: #007bff;
+        .contact-info h2,
+        .contact-form h2 {
             color: white;
-            padding: 15px;
-            border-radius: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-icon {
+            width: 3rem;
+            height: 3rem;
+            background: var(--gradient-primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .contact-text h4 {
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .contact-text a {
+            color: var(--secondary);
             text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
+            transition: var(--transition);
         }
 
-        .direct-contact .contact-option:hover {
-            background-color: #0056b3;
+        .contact-text a:hover {
+            color: white;
+            text-decoration: underline;
         }
 
-        /* Logo and Image Section */
-        .logo-section {
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        textarea.form-control {
+            min-height: 10rem;
+            resize: vertical;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+            border-color: transparent;
+        }
+
+        .social-link.whatsapp:hover {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=20');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+        }
+
+        .footer .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 0.5rem;
+        }
+
+        .copyright {
             text-align: center;
-            margin-top: 20px;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.875rem;
         }
 
-        .logo-section img {
-            width: 200px;
-            height: auto;
-            margin: 10px;
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+            text-decoration: none;
+            box-shadow: var(--shadow-xl);
+            z-index: 1000;
+            transition: var(--transition);
+            border: 2px solid white;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.25rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Service Features */
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+
+        .service-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
         }
     </style>
 </head>
-<body>
+<body ng-controller="MainController" ng-cloak>
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/923472740080?text=Hi%20Digital%20Solutions!%20I'm%20interested%20in%20your%20services.%20Let's%20discuss%20how%20you%20can%20help%20my%20business." 
+       target="_blank" 
+       class="whatsapp-float"
+       ng-mouseenter="animateWhatsApp = true"
+       ng-mouseleave="animateWhatsApp = false"
+       ng-class="{'animate__animated animate__pulse': animateWhatsApp}">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- Header -->
-    <header>
-        <img src="image/logo.jpeg" width="200" height="250" alt="Logo">
-        <div class="contact-info">
-            <a href="tel:+923472740080">Phone: 0347-2740080</a>
-            <a href="mailto:onlyforw910@gmail.com">Email: onlyforw910@gmail.com</a>
-        </div>
+    <header class="header" ng-class="{'scrolled': isScrolled}">
+        <div class="container">
+            <nav class="nav">
+                <a href="#home" class="logo" ng-click="scrollTo('home')">
+                    <div class="logo-icon">DS</div>
+                    <div class="logo-text">
+                        Digital Solutions
+                        <span>Professional Digital Services</span>
+                    </div>
+                </a>
 
-        <!-- WhatsApp Icon Only -->
-        <div class="contact-icons">
-            <a href="https://wa.me/923472740080" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-            </a>
-            <p>Click on WhatsApp</p>
-        </div>
+                <ul class="nav-menu" ng-show="!mobileMenuOpen || windowWidth > 768">
+                    <li ng-repeat="item in menuItems">
+                        <a href="{{'#' + item.id}}" 
+                           class="nav-link" 
+                           ng-click="scrollTo(item.id)"
+                           ng-class="{'active': activeSection === item.id}">
+                            {{item.name}}
+                        </a>
+                    </li>
+                </ul>
 
-        <h1>Social Media & Internet Marketing</h1>
-        <p>We help grow your brand online through innovative strategies</p>
+                <button class="mobile-menu-btn" ng-click="toggleMobileMenu()">
+                    <i class="fas" ng-class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+                </button>
+            </nav>
+        </div>
     </header>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-    <!-- Logo Section -->
-    <section class="logo-section">
-        <img src="image/logo.png" alt="Logo"> <!-- Replace with your actual logo -->
-        <img src="image1.jpg" alt="Service 1"> <!-- Replace with actual image -->
-        <img src="image2.jpg" alt="Service 2"> <!-- Replace with actual image -->
-    </section>
-
-    <!-- Demo Button Section -->
-    <section id="demo">
-        <button class="cta-button" onclick="openModal()">Watch Our Demo</button>
-    </section>
-
-    <!-- Modal for Demo Videos -->
-    <div class="modal" id="demoModal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">×</button>
-            <h2>Our Demo Videos</h2>
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content fade-in" ng-class="{'visible': heroVisible}">
+                <h1>Transform Your Business with Digital Solutions</h1>
+                <div class="tagline">Professional Digital Services for Modern Businesses</div>
+                <p>We deliver comprehensive digital solutions that drive business growth, enhance online visibility, and maximize ROI. From strategic digital marketing campaigns to custom web development, we help businesses thrive in the digital landscape.</p>
+                
+                <div class="services-tags">
+                    <span class="service-tag" ng-repeat="tag in serviceTags">{{tag}}</span>
+                </div>
+                
+                <a href="#contact" class="btn btn-primary" ng-click="scrollTo('contact')">
+                    <i class="fas fa-rocket"></i>
+                    Start Your Digital Journey
+                </a>
+            </div>
         </div>
-    </div>
+    </section>
 
     <!-- Services Section -->
-    <section id="services">
-        <h2>Our Services</h2>
-        <div class="services">
-            <div class="service-item">
-                <h3>Social Media Management</h3>
-                <p>Manage your social media presence across all platforms. We help create engaging content, interact with followers, and build your brand’s presence online.</p>
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Digital Services</h2>
+                <p>Comprehensive digital solutions designed to transform your business</p>
             </div>
-            <div class="service-item">
-                <h3>SEO (Search Engine Optimization)</h3>
-                <p>Optimize your website for search engines to increase visibility and drive organic traffic. Our team uses proven SEO techniques that improve rankings and attract targeted visitors.</p>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in" 
+                     ng-repeat="service in services" 
+                     ng-class="{'visible': serviceVisible}"
+                     ng-mouseenter="service.hover = true"
+                     ng-mouseleave="service.hover = false">
+                    <div class="service-icon">
+                        <i class="fas" ng-class="service.icon"></i>
+                    </div>
+                    <h3>{{service.title}}</h3>
+                    <p>{{service.description}}</p>
+                    <ul class="service-features">
+                        <li ng-repeat="feature in service.features">{{feature}}</li>
+                    </ul>
+                </div>
             </div>
-            <div class="service-item">
-                <h3>PPC Advertising</h3>
-                <p>Run paid ads on Google, Facebook, and other platforms to attract immediate traffic. We create optimized campaigns that deliver high ROI.</p>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Recent Work</h2>
+                <p>Explore our successful digital transformation projects</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="service-card" style="background: rgba(255, 255, 255, 0.1); color: white; backdrop-filter: blur(10px);">
+                    <h3 style="color: white;">E-commerce Success Story</h3>
+                    <p>Increased online sales by 250% for a retail client through our comprehensive digital strategy.</p>
+                </div>
+                <div class="service-card" style="background: rgba(255, 255, 255, 0.1); color: white; backdrop-filter: blur(10px);">
+                    <h3 style="color: white;">Brand Transformation</h3>
+                    <p>Complete digital rebranding that increased brand awareness by 300% in 6 months.</p>
+                </div>
+                <div class="service-card" style="background: rgba(255, 255, 255, 0.1); color: white; backdrop-filter: blur(10px);">
+                    <h3 style="color: white;">SEO Dominance</h3>
+                    <p>Achieved #1 Google rankings for 50+ competitive keywords within 4 months.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>Interested in working with us? Get in touch with our team today!</p>
-        <form action="#" method="POST">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit" id="submit-btn" class="cta-button" onclick="submitMessage(event)">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Feedback Section moved to the end -->
-    <section class="comment-section">
-        <h3>Leave Your Feedback</h3>
-        <textarea id="comment" rows="4" placeholder="Write your comment here..."></textarea>
-        <button id="comment-btn" class="cta-button" onclick="submitComment()">Submit Comment</button>
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Ready to transform your digital presence? Contact us for a free consultation</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info fade-in" ng-class="{'visible': contactVisible}">
+                    <h2>Contact Information</h2>
+                    <p>Let's discuss how we can help grow your business with our digital solutions.</p>
+                    
+                    <ul class="contact-details">
+                        <li class="contact-item" ng-repeat="contact in contactDetails">
+                            <div class="contact-icon">
+                                <i class="fas" ng-class="contact.icon"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>{{contact.title}}</h4>
+                                <div ng-switch="contact.type">
+                                    <a ng-switch-when="email" href="mailto:{{contact.value}}?subject=Digital Solutions Inquiry" target="_blank">
+                                        {{contact.value}}
+                                    </a>
+                                    <a ng-switch-when="whatsapp" href="https://wa.me/923472740080?text=Hi%20Digital%20Solutions!%20I'm%20interested%20in%20{{contact.value}}" target="_blank">
+                                        {{contact.value}}
+                                    </a>
+                                    <span ng-switch-when="text">{{contact.value}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a ng-repeat="social in socialLinks" 
+                           href="{{social.url}}" 
+                           target="_blank" 
+                           class="social-link" 
+                           ng-class="social.class"
+                           ng-mouseenter="social.hover = true"
+                           ng-mouseleave="social.hover = false">
+                            <i class="fab" ng-class="social.icon"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form fade-in" ng-class="{'visible': contactVisible}">
+                    <h2>Send us a message</h2>
+                    <p style="margin-bottom: 2rem; opacity: 0.9;">Fill out the form below and we'll get back to you within 24 hours.</p>
+                    
+                    <!-- Success/Error Messages -->
+                    <div class="alert alert-success" 
+                         ng-show="formSuccess" 
+                         style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem; border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
+                    </div>
+                    <div class="alert alert-error" 
+                         ng-show="formError" 
+                         style="background: rgba(239, 68, 68, 0.2); color: #ef4444; padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem; border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <i class="fas fa-exclamation-circle"></i> {{errorMessage}}
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <form name="contactForm" ng-submit="submitForm()" novalidate>
+                        <div class="form-group">
+                            <input type="text" 
+                                   class="form-control" 
+                                   placeholder="Your Name"
+                                   ng-model="formData.name"
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" 
+                                   class="form-control" 
+                                   placeholder="Your Email"
+                                   ng-model="formData.email"
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" 
+                                   class="form-control" 
+                                   placeholder="Your Phone"
+                                   ng-model="formData.phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <select class="form-control" 
+                                    ng-model="formData.service"
+                                    required
+                                    style="appearance: none; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"white\"><path d=\"M7 10l5 5 5-5z\"/></svg>'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;">
+                                <option value="">Select a Service</option>
+                                <option ng-repeat="service in services" value="{{service.title}}">
+                                    {{service.title}}
+                                </option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" 
+                                      placeholder="Your Message"
+                                      ng-model="formData.message"
+                                      required></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="btn btn-primary" 
+                                ng-disabled="contactForm.$invalid || submitting"
+                                style="width: 100%;">
+                            <span ng-show="!submitting">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </span>
+                            <span ng-show="submitting">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Social Media & Internet Marketing</p>
-        <div class="social-links">
-            <a href="#">Facebook</a>
-            <a href="#">Twitter</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Instagram</a>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="logo" style="margin-bottom: 1.5rem;">
+                        <div class="logo-icon">DS</div>
+                        <div class="logo-text" style="color: white;">
+                            Digital Solutions
+                            <span style="color: var(--gray);">Professional Digital Services</span>
+                        </div>
+                    </div>
+                    <p style="color: var(--gray); max-width: 300px;">Transforming businesses through innovative digital solutions and strategic expertise.</p>
+                </div>
+                
+                <div>
+                    <h4 style="color: white; margin-bottom: 1.5rem;">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li ng-repeat="item in menuItems">
+                            <a href="{{'#' + item.id}}" ng-click="scrollTo(item.id)">{{item.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: white; margin-bottom: 1.5rem;">Our Services</h4>
+                    <ul class="footer-links">
+                        <li ng-repeat="service in services">
+                            <a href="#services" ng-click="scrollTo('services')">{{service.title}}</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: white; margin-bottom: 1.5rem;">Contact Us</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:syedsikandarshah963@gmail.com">syedsikandarshah963@gmail.com</a></li>
+                        <li><a href="https://wa.me/923472740080" target="_blank">WhatsApp: +92 347 2740080</a></li>
+                        <li style="color: var(--gray);">CEO: Syed Sikandar Shah</li>
+                        <li style="color: var(--gray);">Global Digital Services</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; {{currentYear}} Digital Solutions. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Demo Modal and Button Actions -->
+    <!-- AngularJS Application -->
     <script>
-        // Open the modal
-        function openModal() {
-            document.getElementById("demoModal").style.display = "flex";
-        }
-
-        // Close the modal
-        function closeModal() {
-            document.getElementById("demoModal").style.display = "none";
-        }
-
-        // Function to simulate submitting a comment
-        function submitComment() {
-            let commentBtn = document.getElementById("comment-btn");
-            commentBtn.classList.add("green");
-            commentBtn.innerText = "Thank you for your comment!";
-        }
-
-        // Function to simulate sending a message
-        function submitMessage(event) {
-            event.preventDefault();
-            let submitBtn = document.getElementById("submit-btn");
-            submitBtn.classList.add("green");
-            submitBtn.innerText = "Thank you for your message!";
-        }
+        angular.module('digitalSolutionsApp', ['ngAnimate', 'ngAria', 'ngTouch'])
+        .controller('MainController', ['$scope', '$window', '$timeout', '$document', function($scope, $window, $timeout, $document) {
+            // Initialize variables
+            $scope.currentYear = new Date().getFullYear();
+            $scope.isScrolled = false;
+            $scope.mobileMenuOpen = false;
+            $scope.activeSection = 'home';
+            $scope.windowWidth = $window.innerWidth;
+            $scope.animateWhatsApp = false;
+            
+            // Animation states
+            $scope.heroVisible = false;
+            $scope.serviceVisible = false;
+            $scope.portfolioVisible = false;
+            $scope.aboutVisible = false;
+            $scope.contactVisible = false;
+            
+            // Form states
+            $scope.formSuccess = false;
+            $scope.formError = false;
+            $scope.submitting = false;
+            $scope.errorMessage = '';
+            
+            // Data
+            $scope.serviceTags = [
+                'Digital Marketing',
+                'Web Development', 
+                'SEO Optimization',
+                'E-commerce Solutions',
+                'Social Media Management',
+                'Data Analytics'
+            ];
+            
+            $scope.menuItems = [
+                { id: 'home', name: 'Home' },
+                { id: 'services', name: 'Services' },
+                { id: 'portfolio', name: 'Portfolio' },
+                { id: 'contact', name: 'Contact' }
+            ];
+            
+            $scope.services = [
+                {
+                    title: 'Digital Marketing',
+                    description: 'Comprehensive digital marketing strategies to boost your online presence and drive conversions.',
+                    icon: 'fa-bullhorn',
+                    features: [
+                        'SEO Optimization',
+                        'Social Media Marketing',
+                        'Email Marketing',
+                        'Content Strategy',
+                        'PPC Advertising'
+                    ]
+                },
+                {
+                    title: 'Web Development',
+                    description: 'Custom websites and web applications built with modern technologies and best practices.',
+                    icon: 'fa-laptop-code',
+                    features: [
+                        'Responsive Design',
+                        'E-commerce Development',
+                        'CMS Integration',
+                        'Web Application Development',
+                        'API Integration'
+                    ]
+                },
+                {
+                    title: 'SEO Optimization',
+                    description: 'Search engine optimization services to improve your website ranking and organic traffic.',
+                    icon: 'fa-search',
+                    features: [
+                        'Keyword Research',
+                        'On-Page SEO',
+                        'Technical SEO',
+                        'Local SEO',
+                        'Content Optimization'
+                    ]
+                },
+                {
+                    title: 'E-commerce Solutions',
+                    description: 'Complete e-commerce platforms and solutions for online businesses of all sizes.',
+                    icon: 'fa-shopping-cart',
+                    features: [
+                        'Shopify Development',
+                        'WooCommerce Solutions',
+                        'Payment Integration',
+                        'Inventory Management',
+                        'Mobile Commerce'
+                    ]
+                },
+                {
+                    title: 'Social Media Management',
+                    description: 'Professional social media management and content creation for brand growth.',
+                    icon: 'fa-share-alt',
+                    features: [
+                        'Content Creation',
+                        'Community Management',
+                        'Advertising Campaigns',
+                        'Analytics & Reporting',
+                        'Brand Strategy'
+                    ]
+                },
+                {
+                    title: 'Data Analytics',
+                    description: 'Data analysis and business intelligence solutions for informed decision making.',
+                    icon: 'fa-chart-line',
+                    features: [
+                        'Business Intelligence',
+                        'Dashboard Development',
+                        'Predictive Analytics',
+                        'Performance Tracking',
+                        'ROI Analysis'
+                    ]
+                }
+            ];
+            
+            $scope.contactDetails = [
+                {
+                    title: 'Email Address',
+                    value: 'syedsikandarshah963@gmail.com',
+                    type: 'email',
+                    icon: 'fa-envelope'
+                },
+                {
+                    title: 'WhatsApp Business',
+                    value: '+92 347 2740080',
+                    type: 'whatsapp',
+                    icon: 'fa-whatsapp'
+                },
+                {
+                    title: 'Business Hours',
+                    value: 'Mon-Fri: 9:00 AM - 7:00 PM',
+                    type: 'text',
+                    icon: 'fa-clock'
+                },
+                {
+                    title: 'Service Location',
+                    value: 'Global Digital Services',
+                    type: 'text',
+                    icon: 'fa-globe'
+                }
+            ];
+            
+            $scope.socialLinks = [
+                {
+                    name: 'WhatsApp',
+                    icon: 'fa-whatsapp',
+                    url: 'https://wa.me/923472740080?text=Hi%20Digital%20Solutions!%20I%20found%20you%20through%20your%20website.',
+                    class: 'whatsapp'
+                },
+                {
+                    name: 'Email',
+                    icon: 'fa-envelope',
+                    url: 'mailto:syedsikandarshah963@gmail.com?subject=Digital%20Solutions%20Inquiry',
+                    class: ''
+                },
+                {
+                    name: 'LinkedIn',
+                    icon: 'fa-linkedin-in',
+                    url: '#',
+                    class: ''
+                },
+                {
+                    name: 'Facebook',
+                    icon: 'fa-facebook-f',
+                    url: '#',
+                    class: ''
+                },
+                {
+                    name: 'Instagram',
+                    icon: 'fa-instagram',
+                    url: '#',
+                    class: ''
+                }
+            ];
+            
+            $scope.formData = {
+                name: '',
+                email: '',
+                phone: '',
+                service: '',
+                message: ''
+            };
+            
+            // Window scroll event
+            angular.element($window).bind('scroll', function() {
+                $scope.isScrolled = $window.pageYOffset > 50;
+                
+                // Update active section
+                var sections = ['home', 'services', 'portfolio', 'contact'];
+                var scrollPosition = $window.pageYOffset + 100;
+                
+                for (var i = sections.length - 1; i >= 0; i--) {
+                    var element = document.getElementById(sections[i]);
+                    if (element && element.offsetTop <= scrollPosition) {
+                        $scope.activeSection = sections[i];
+                        break;
+                    }
+                }
+                
+                // Trigger animations
+                $scope.checkAnimations();
+                $scope.$apply();
+            });
+            
+            // Window resize event
+            angular.element($window).bind('resize', function() {
+                $scope.windowWidth = $window.innerWidth;
+                if ($scope.windowWidth > 768) {
+                    $scope.mobileMenuOpen = false;
+                }
+                $scope.$apply();
+            });
+            
+            // Check animations on scroll
+            $scope.checkAnimations = function() {
+                var scrollPosition = $window.pageYOffset + $window.innerHeight;
+                
+                // Hero section
+                var hero = document.getElementById('home');
+                if (hero && hero.offsetTop < scrollPosition) {
+                    $scope.heroVisible = true;
+                }
+                
+                // Services section
+                var services = document.getElementById('services');
+                if (services && services.offsetTop < scrollPosition) {
+                    $scope.serviceVisible = true;
+                }
+                
+                // Portfolio section
+                var portfolio = document.getElementById('portfolio');
+                if (portfolio && portfolio.offsetTop < scrollPosition) {
+                    $scope.portfolioVisible = true;
+                }
+                
+                // Contact section
+                var contact = document.getElementById('contact');
+                if (contact && contact.offsetTop < scrollPosition) {
+                    $scope.contactVisible = true;
+                }
+            };
+            
+            // Smooth scroll function
+            $scope.scrollTo = function(sectionId) {
+                var element = document.getElementById(sectionId);
+                if (element) {
+                    $window.scrollTo({
+                        top: element.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    $scope.activeSection = sectionId;
+                    $scope.mobileMenuOpen = false;
+                }
+            };
+            
+            // Mobile menu toggle
+            $scope.toggleMobileMenu = function() {
+                $scope.mobileMenuOpen = !$scope.mobileMenuOpen;
+            };
+            
+            // Form submission
+            $scope.submitForm = function() {
+                if (!$scope.formData.name || !$scope.formData.email || !$scope.formData.service || !$scope.formData.message) {
+                    $scope.formError = true;
+                    $scope.errorMessage = 'Please fill all required fields.';
+                    return;
+                }
+                
+                $scope.submitting = true;
+                $scope.formError = false;
+                
+                // Simulate API call
+                $timeout(function() {
+                    // Log form data
+                    console.log('Form submitted:', $scope.formData);
+                    
+                    // Prepare WhatsApp message
+                    var whatsappMessage = `New Contact Form Submission:%0A%0A👤 Name: ${$scope.formData.name}%0A📧 Email: ${$scope.formData.email}%0A📱 Phone: ${$scope.formData.phone || 'Not provided'}%0A💼 Service: ${$scope.formData.service}%0A%0A💬 Message:%0A${$scope.formData.message}%0A%0A---%0AFrom Digital Solutions Website`;
+                    
+                    // Show success message
+                    $scope.formSuccess = true;
+                    $scope.submitting = false;
+                    
+                    // Reset form
+                    $scope.formData = {
+                        name: '',
+                        email: '',
+                        phone: '',
+                        service: '',
+                        message: ''
+                    };
+                    
+                    // Scroll to top of contact section
+                    $window.scrollTo({
+                        top: document.getElementById('contact').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Show WhatsApp option
+                    $timeout(function() {
+                        if (confirm('Message sent successfully! Would you like to continue the conversation on WhatsApp?')) {
+                            $window.open(`https://wa.me/923472740080?text=${whatsappMessage}`, '_blank');
+                        }
+                    }, 1000);
+                    
+                    // Hide success message after 5 seconds
+                    $timeout(function() {
+                        $scope.formSuccess = false;
+                    }, 5000);
+                    
+                }, 1500); // Simulate network delay
+            };
+            
+            // Initialize animations on load
+            $timeout(function() {
+                $scope.heroVisible = true;
+                $scope.checkAnimations();
+            }, 300);
+            
+            // Log initialization
+            console.log('Digital Solutions Website Initialized');
+            console.log('Email: syedsikandarshah963@gmail.com');
+            console.log('WhatsApp: +92 347 2740080');
+            console.log('CEO: Syed Sikandar Shah');
+        }]);
     </script>
-
 </body>
 </html>
