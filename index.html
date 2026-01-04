@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en" ng-app="digitalSolutionsApp" ng-strict-di ng-controller="MainController">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Professional Digital Solutions for business transformation. Digital Marketing, Web Development, SEO, E-commerce, Social Media Management, Data Analytics services. Transform your business with our expert solutions.">
@@ -27,6 +26,18 @@
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://digitalsolutions.com">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://via.placeholder.com/180">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://via.placeholder.com/32">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://via.placeholder.com/16">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0066FF">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -76,12 +87,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
-    <!-- Three.js for 3D Backgrounds -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <!-- TweenMax for Smooth Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    
     <style>
         :root {
             --primary: #0066FF;
@@ -121,17 +126,27 @@
             --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Mobile Optimized Variables */
+            --safe-area-inset-top: env(safe-area-inset-top, 0px);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-area-inset-left: env(safe-area-inset-left, 0px);
+            --safe-area-inset-right: env(safe-area-inset-right, 0px);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 100px;
+            scroll-padding-top: 80px;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
@@ -143,35 +158,78 @@
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            padding-top: var(--safe-area-inset-top);
+            padding-bottom: var(--safe-area-inset-bottom);
         }
 
+        /* Touch-friendly text selection */
+        ::selection {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Mobile-first typography */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             letter-spacing: -0.02em;
+            overflow-wrap: break-word;
         }
 
+        p {
+            margin-bottom: 1rem;
+            overflow-wrap: break-word;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Mobile-optimized container */
         .container {
             width: 100%;
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 clamp(1rem, 5vw, 2rem);
+            position: relative;
         }
 
+        /* Touch-friendly buttons */
+        button, 
+        .btn,
+        a {
+            touch-action: manipulation;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        /* Enhanced accessibility focus styles */
+        :focus {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* Section spacing for mobile */
         .section {
-            padding: 6rem 0;
+            padding: clamp(3rem, 8vw, 6rem) 0;
             position: relative;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: clamp(2rem, 6vw, 4rem);
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -187,7 +245,7 @@
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 60px;
             height: 4px;
             background: var(--gradient-primary);
             border-radius: 2px;
@@ -195,13 +253,13 @@
 
         .section-title p {
             color: var(--gray);
-            font-size: 1.125rem;
+            font-size: clamp(1rem, 2vw, 1.125rem);
             max-width: 48rem;
             margin: 0 auto;
             line-height: 1.8;
         }
 
-        /* Header Styles */
+        /* Mobile-first Header with improved mobile navigation */
         .header {
             position: fixed;
             top: 0;
@@ -209,35 +267,40 @@
             right: 0;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(226, 232, 240, 0.3);
             z-index: 1000;
             transition: var(--transition);
-            padding: 0.75rem 0;
+            padding: 0.5rem 0;
+            padding-top: var(--safe-area-inset-top);
+            padding-left: var(--safe-area-inset-left);
+            padding-right: var(--safe-area-inset-right);
         }
 
         .header.scrolled {
             box-shadow: var(--shadow-lg);
             background: rgba(255, 255, 255, 0.98);
-            padding: 0.5rem 0;
+            padding: 0.25rem 0;
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 4.5rem;
+            height: 60px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
             text-decoration: none;
+            min-height: 44px;
         }
 
         .logo-icon {
-            width: 3.5rem;
-            height: 3.5rem;
+            width: 40px;
+            height: 40px;
             background: var(--gradient-primary);
             border-radius: var(--radius);
             display: flex;
@@ -245,8 +308,8 @@
             justify-content: center;
             color: white;
             font-weight: 900;
-            font-size: 1.5rem;
-            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.25);
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
             transition: var(--transition);
         }
 
@@ -257,7 +320,7 @@
         .logo-text {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-            font-size: 1.75rem;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
             color: var(--dark);
             letter-spacing: -0.025em;
         }
@@ -265,16 +328,17 @@
         .logo-text span {
             color: var(--primary);
             display: block;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-top: 0.25rem;
+            margin-top: 0.125rem;
             opacity: 0.9;
         }
 
+        /* Enhanced Mobile Navigation */
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 3rem;
+            gap: clamp(1.5rem, 3vw, 3rem);
         }
 
         .nav-link {
@@ -286,6 +350,9 @@
             padding: 0.5rem 0;
             position: relative;
             font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-link:after {
@@ -310,6 +377,7 @@
             color: var(--primary);
         }
 
+        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -321,21 +389,119 @@
             border-radius: var(--radius);
             transition: var(--transition);
             background: var(--light-gray);
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         .mobile-menu-btn:hover {
             background: var(--border);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-slow);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            padding: 80px 2rem 2rem;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu-overlay.active .mobile-menu-content {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-menu {
+            list-style: none;
+        }
+
+        .mobile-nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.125rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            background: var(--light-gray);
+            color: var(--primary);
+            border-left-color: var(--primary);
+            padding-left: 1.5rem;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-close:hover {
+            background: var(--primary);
+            color: white;
             transform: rotate(90deg);
         }
 
-        /* Hero Section with Auto-scrolling Background */
+        /* Hero Section - Mobile Optimized */
         .hero {
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
             background: var(--darker);
+            padding-top: 80px;
         }
 
         .hero-background-slider {
@@ -359,6 +525,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: scroll;
         }
 
         .hero-slide.active {
@@ -376,65 +543,85 @@
         }
 
         .hero-content {
-            max-width: 56rem;
+            max-width: 100%;
             position: relative;
             z-index: 3;
             color: white;
+            padding: 0 1rem;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 1.25rem;
             line-height: 1.1;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             background: linear-gradient(to right, #ffffff 0%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero .tagline {
-            font-size: 1.5rem;
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
             color: var(--secondary);
             font-weight: 600;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .hero p {
-            font-size: 1.125rem;
-            margin-bottom: 3rem;
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            margin-bottom: clamp(2rem, 4vw, 3rem);
             opacity: 0.95;
-            line-height: 1.8;
+            line-height: 1.7;
             max-width: 40rem;
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Professional Button Styles */
+        /* Mobile-optimized buttons */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
         .professional-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.75rem;
-            padding: 1.125rem 2.5rem;
+            padding: clamp(1rem, 2vw, 1.125rem) clamp(1.75rem, 3vw, 2.5rem);
             background: var(--gradient-primary);
             color: white;
             border: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 1.0625rem;
+            font-size: clamp(1rem, 1.5vw, 1.0625rem);
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.25);
             border-radius: var(--radius);
             cursor: pointer;
             letter-spacing: 0.5px;
             border: 2px solid transparent;
+            text-align: center;
+            min-height: 50px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        @media (min-width: 480px) {
+            .professional-btn {
+                width: auto;
+            }
         }
 
         .professional-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.4);
             border-color: rgba(255, 255, 255, 0.2);
         }
 
@@ -452,8 +639,8 @@
         }
 
         .professional-btn.btn-large {
-            padding: 1.25rem 3rem;
-            font-size: 1.125rem;
+            padding: clamp(1.125rem, 2vw, 1.25rem) clamp(2rem, 4vw, 3rem);
+            font-size: clamp(1.0625rem, 1.5vw, 1.125rem);
             font-weight: 700;
         }
 
@@ -482,36 +669,47 @@
             background: linear-gradient(135deg, #25D366, #128C7E) !important;
         }
 
-        /* Enhanced Professional "Explore Services" Button without arrow */
+        /* Explore Services Button */
         .explore-service-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.75rem;
-            padding: 1.125rem 2.5rem;
+            padding: clamp(1rem, 2vw, 1.125rem) clamp(1.75rem, 3vw, 2.5rem);
             background: white;
             color: var(--primary);
             border: 2px solid var(--primary);
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 1.0625rem;
+            font-size: clamp(1rem, 1.5vw, 1.0625rem);
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.15);
             border-radius: var(--radius);
             cursor: pointer;
             letter-spacing: 0.5px;
+            text-align: center;
+            min-height: 50px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        @media (min-width: 480px) {
+            .explore-service-btn {
+                width: auto;
+            }
         }
 
         .explore-service-btn:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.3);
         }
 
-        /* Contact Info Modal */
+        /* Contact Modal - Mobile Optimized */
         .contact-modal-overlay {
             position: fixed;
             top: 0;
@@ -520,6 +718,7 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -527,6 +726,9 @@
             opacity: 0;
             visibility: hidden;
             transition: var(--transition-slow);
+            padding: 1rem;
+            padding-top: var(--safe-area-inset-top);
+            padding-bottom: var(--safe-area-inset-bottom);
         }
 
         .contact-modal-overlay.active {
@@ -537,14 +739,16 @@
         .contact-modal-content {
             background: white;
             border-radius: var(--radius-xl);
-            padding: 3rem;
+            padding: clamp(2rem, 4vw, 3rem);
             max-width: 500px;
-            width: 90%;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
             transform: translateY(50px) scale(0.9);
             opacity: 0;
             transition: var(--transition-slow);
             position: relative;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .contact-modal-overlay.active .contact-modal-content {
@@ -554,8 +758,8 @@
 
         .contact-modal-close {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 1rem;
+            right: 1rem;
             background: var(--light-gray);
             border: none;
             width: 2.5rem;
@@ -569,6 +773,8 @@
             font-size: 1.25rem;
             color: var(--dark);
             z-index: 2;
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .contact-modal-close:hover {
@@ -579,12 +785,12 @@
 
         .contact-modal-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .contact-modal-header h3 {
             color: var(--dark);
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 3vw, 1.75rem);
             margin-bottom: 0.5rem;
         }
 
@@ -595,20 +801,21 @@
 
         .contact-info-grid {
             display: grid;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .contact-info-item {
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1.25rem;
+            padding: 1rem;
             background: var(--light-gray);
             border-radius: var(--radius);
             border-left: 4px solid var(--primary);
             transition: var(--transition);
             cursor: pointer;
+            min-height: 80px;
         }
 
         .contact-info-item:hover {
@@ -627,6 +834,7 @@
             justify-content: center;
             color: white;
             font-size: 1.25rem;
+            flex-shrink: 0;
         }
 
         .contact-info-content h4 {
@@ -652,7 +860,7 @@
             text-decoration: underline;
         }
 
-        /* Services Showcase */
+        /* Services Showcase - Mobile Optimized */
         .services-showcase {
             background: var(--light-gray);
             position: relative;
@@ -673,8 +881,8 @@
 
         .showcase-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
             position: relative;
             z-index: 1;
         }
@@ -691,13 +899,13 @@
         }
 
         .showcase-item:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-xl);
             border-color: var(--primary);
         }
 
         .showcase-image {
-            height: 250px;
+            height: 200px;
             overflow: hidden;
             position: relative;
         }
@@ -710,7 +918,7 @@
         }
 
         .showcase-item:hover .showcase-image img {
-            transform: scale(1.1) rotate(2deg);
+            transform: scale(1.1);
         }
 
         .showcase-overlay {
@@ -723,7 +931,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 2rem;
+            padding: 1.5rem;
             color: white;
             opacity: 0;
             transition: var(--transition);
@@ -734,48 +942,59 @@
         }
 
         .showcase-content {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .showcase-content h3 {
-            font-size: 1.5rem;
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
             color: var(--dark);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .showcase-content p {
             color: var(--gray);
             line-height: 1.7;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-size: 1rem;
         }
 
-        /* Enhanced Back to Service Button Shape */
+        /* Back to Service Button */
         .back-to-service {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.75rem;
-            padding: 1rem 2rem;
+            padding: clamp(0.875rem, 1.5vw, 1rem) clamp(1.5rem, 2.5vw, 2rem);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: clamp(0.9375rem, 1.5vw, 1rem);
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.25);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
             border-radius: var(--radius-full);
             cursor: pointer;
             letter-spacing: 0.5px;
             border: 2px solid transparent;
+            text-align: center;
+            min-height: 50px;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        @media (min-width: 480px) {
+            .back-to-service {
+                width: auto;
+            }
         }
 
         .back-to-service:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
             border-color: rgba(255, 255, 255, 0.2);
         }
 
@@ -783,7 +1002,7 @@
             transform: translateY(-1px);
         }
 
-        /* Process Section */
+        /* Process Section - Mobile Optimized */
         .process-section {
             background: white;
             position: relative;
@@ -802,15 +1021,15 @@
 
         .process-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
             position: relative;
             z-index: 1;
         }
 
         .process-step {
             background: white;
-            padding: 2.5rem;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
             border-radius: var(--radius-xl);
             box-shadow: var(--shadow);
             border-top: 4px solid var(--primary);
@@ -821,7 +1040,7 @@
         }
 
         .process-step:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
         }
 
@@ -829,8 +1048,8 @@
             position: absolute;
             top: -20px;
             left: 20px;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: var(--gradient-primary);
             border-radius: 50%;
             font-weight: 900;
@@ -838,15 +1057,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.2);
+            font-size: 1.25rem;
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.2);
             z-index: 1;
         }
 
         .process-step h3 {
-            font-size: 1.375rem;
+            font-size: clamp(1.25rem, 2vw, 1.375rem);
             color: var(--dark);
-            margin: 1.5rem 0 1rem 0;
+            margin: 1rem 0 0.75rem 0;
             padding-left: 0;
         }
 
@@ -856,7 +1075,7 @@
             font-size: 1rem;
         }
 
-        /* Gallery Section */
+        /* Gallery Section - Mobile Optimized */
         .gallery-section {
             background: var(--darker);
             color: white;
@@ -878,11 +1097,11 @@
 
         .gallery-slider {
             position: relative;
-            height: 500px;
+            height: clamp(300px, 50vw, 500px);
             overflow: hidden;
             border-radius: var(--radius-xl);
-            margin: 3rem 0;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin: clamp(1.5rem, 4vw, 3rem) 0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
         .gallery-slide {
@@ -928,7 +1147,7 @@
             left: 0;
             right: 0;
             background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
-            padding: 3rem 2rem 2rem;
+            padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2vw, 2rem) clamp(1rem, 2vw, 2rem);
             color: white;
             transform: translateY(20px);
             transition: var(--transition);
@@ -939,27 +1158,27 @@
         }
 
         .gallery-overlay h3 {
-            font-size: 1.75rem;
-            margin-bottom: 0.75rem;
+            font-size: clamp(1.5rem, 3vw, 1.75rem);
+            margin-bottom: 0.5rem;
             color: white;
         }
 
         .gallery-overlay p {
             opacity: 0.9;
-            margin-bottom: 1.5rem;
-            font-size: 1.0625rem;
+            margin-bottom: 1rem;
+            font-size: clamp(1rem, 1.5vw, 1.0625rem);
         }
 
         .gallery-controls {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .gallery-control {
-            width: 3.5rem;
-            height: 3.5rem;
+            width: 3rem;
+            height: 3rem;
             border-radius: var(--radius);
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -971,6 +1190,9 @@
             font-size: 1.25rem;
             color: white;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .gallery-control:hover {
@@ -984,19 +1206,21 @@
         .gallery-dots {
             display: flex;
             justify-content: center;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .gallery-dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.3);
             cursor: pointer;
             transition: var(--transition);
             border: none;
             padding: 0;
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .gallery-dot.active {
@@ -1008,7 +1232,7 @@
             background: var(--secondary);
         }
 
-        /* Contact Section */
+        /* Contact Section - Mobile Optimized */
         .contact-section {
             background: var(--darker);
             color: white;
@@ -1029,10 +1253,11 @@
         .contact-form {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
-            padding: 3rem;
+            -webkit-backdrop-filter: blur(20px);
+            padding: clamp(1.5rem, 3vw, 3rem);
             border-radius: var(--radius-xl);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 600px;
+            width: 100%;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -1040,17 +1265,17 @@
 
         .contact-form h3 {
             color: white;
-            margin-bottom: 2rem;
-            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.5rem, 3vw, 1.75rem);
         }
 
         .form-group {
-            margin-bottom: 1.75rem;
+            margin-bottom: 1.25rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 1.25rem 1.5rem;
+            padding: 1rem 1.25rem;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius);
@@ -1058,6 +1283,8 @@
             font-size: 1rem;
             transition: var(--transition);
             font-family: 'Inter', sans-serif;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         .form-control:focus {
@@ -1071,6 +1298,14 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        select.form-control {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 16px;
+            padding-right: 2.5rem;
+        }
+
         select.form-control option {
             background: var(--darker);
             color: white;
@@ -1078,16 +1313,18 @@
         }
 
         textarea.form-control {
-            min-height: 12rem;
+            min-height: 150px;
             resize: vertical;
         }
 
-        /* Service Details Page */
+        /* Service Details Page - Mobile Optimized */
         .service-details-page {
-            padding-top: 8rem;
+            padding-top: clamp(6rem, 10vw, 8rem);
             min-height: 100vh;
+            min-height: 100dvh;
             position: relative;
             overflow: hidden;
+            background: var(--darker);
         }
 
         .service-background-slider {
@@ -1126,10 +1363,10 @@
         .back-nav {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            padding: 1rem 1.5rem;
-            background: white;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             width: fit-content;
@@ -1137,19 +1374,22 @@
             transition: var(--transition);
             border: 2px solid transparent;
             position: sticky;
-            top: 100px;
+            top: 80px;
             z-index: 10;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            min-height: 44px;
         }
 
         .back-nav:hover {
-            transform: translateX(-10px);
+            transform: translateX(-5px);
             border-color: var(--primary);
             box-shadow: var(--shadow-lg);
         }
 
         .back-nav i {
             color: var(--primary);
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             transition: transform 0.3s ease;
         }
 
@@ -1159,13 +1399,14 @@
 
         .service-details-header {
             text-align: center;
-            margin-bottom: 4rem;
-            padding: 4rem;
+            margin-bottom: clamp(2rem, 4vw, 4rem);
+            padding: clamp(2rem, 4vw, 4rem) clamp(1rem, 3vw, 2rem);
             background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 170, 0.1));
             border-radius: var(--radius-xl);
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .service-details-header-content {
@@ -1174,7 +1415,7 @@
         }
 
         .service-details-header h1 {
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1183,49 +1424,51 @@
         }
 
         .service-icon-large {
-            width: 6rem;
-            height: 6rem;
+            width: clamp(4rem, 8vw, 6rem);
+            height: clamp(4rem, 8vw, 6rem);
             background: var(--gradient-primary);
             border-radius: var(--radius-xl);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.3);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.3);
             transition: var(--transition);
-            margin: 0 auto 2rem;
+            margin: 0 auto clamp(1.5rem, 3vw, 2rem);
         }
 
         .service-icon-large:hover {
             transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 30px 60px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.4);
         }
 
-        /* Enhanced Professional Chatbot */
+        /* Enhanced Professional Chatbot - Mobile Optimized */
         .chatbot-container {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1rem;
+            right: 1rem;
             z-index: 1000;
         }
 
         .chatbot-toggle {
-            width: 4.5rem;
-            height: 4.5rem;
+            width: clamp(3.5rem, 8vw, 4.5rem);
+            height: clamp(3.5rem, 8vw, 4.5rem);
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 3vw, 1.75rem);
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
             border: 3px solid white;
             position: relative;
             animation: pulse 2s infinite;
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .chatbot-toggle i {
@@ -1239,20 +1482,20 @@
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 102, 255, 0); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 102, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0); }
         }
 
         .chatbot-toggle:hover {
             transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.4);
         }
 
         .chatbot-toggle.unread:after {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 5px;
+            right: 5px;
             width: 12px;
             height: 12px;
             background: var(--danger);
@@ -1268,13 +1511,13 @@
 
         .chatbot-window {
             position: absolute;
-            bottom: 5rem;
+            bottom: calc(100% + 10px);
             right: 0;
-            width: 380px;
-            height: 550px;
+            width: clamp(300px, 90vw, 380px);
+            height: clamp(400px, 70vh, 550px);
             background: white;
             border-radius: var(--radius-xl);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -1294,7 +1537,7 @@
         .chatbot-header {
             background: var(--gradient-primary);
             color: white;
-            padding: 1.25rem 1.5rem;
+            padding: 1rem 1.25rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1318,15 +1561,16 @@
         }
 
         .chatbot-avatar {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 2.25rem;
+            height: 2.25rem;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             animation: spin 20s linear infinite;
+            flex-shrink: 0;
         }
 
         @keyframes spin {
@@ -1337,7 +1581,7 @@
         .chatbot-header h4 {
             color: white;
             margin: 0;
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 600;
         }
 
@@ -1361,8 +1605,8 @@
         .chatbot-close {
             background: rgba(255, 255, 255, 0.2);
             border: none;
-            width: 2.25rem;
-            height: 2.25rem;
+            width: 2rem;
+            height: 2rem;
             border-radius: 50%;
             color: white;
             cursor: pointer;
@@ -1370,7 +1614,9 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            font-size: 1.125rem;
+            font-size: 1rem;
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .chatbot-close:hover {
@@ -1380,26 +1626,27 @@
 
         .chatbot-messages {
             flex: 1;
-            padding: 1.5rem;
+            padding: 1rem;
             overflow-y: auto;
             background: var(--light-gray);
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
+            -webkit-overflow-scrolling: touch;
         }
 
         .chatbot-messages::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
 
         .chatbot-messages::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.05);
-            border-radius: 3px;
+            border-radius: 2px;
         }
 
         .chatbot-messages::-webkit-scrollbar-thumb {
             background: var(--primary);
-            border-radius: 3px;
+            border-radius: 2px;
         }
 
         .chatbot-messages::-webkit-scrollbar-thumb:hover {
@@ -1432,9 +1679,9 @@
         }
 
         .chatbot-bubble {
-            padding: 1rem 1.25rem;
-            border-radius: var(--radius-lg);
-            font-size: 0.9375rem;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
             line-height: 1.5;
             box-shadow: var(--shadow-sm);
             position: relative;
@@ -1443,16 +1690,16 @@
         .chatbot-message.bot .chatbot-bubble {
             background: white;
             color: var(--dark);
-            border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+            border-radius: 0 var(--radius) var(--radius) var(--radius);
             border: 1px solid var(--border);
         }
 
         .chatbot-message.bot .chatbot-bubble:before {
             content: '';
             position: absolute;
-            left: -10px;
+            left: -8px;
             top: 0;
-            border: 10px solid transparent;
+            border: 8px solid transparent;
             border-right-color: white;
             border-left: 0;
         }
@@ -1460,21 +1707,21 @@
         .chatbot-message.user .chatbot-bubble {
             background: var(--primary);
             color: white;
-            border-radius: var(--radius-lg) 0 var(--radius-lg) var(--radius-lg);
+            border-radius: var(--radius) 0 var(--radius) var(--radius);
         }
 
         .chatbot-message.user .chatbot-bubble:after {
             content: '';
             position: absolute;
-            right: -10px;
+            right: -8px;
             top: 0;
-            border: 10px solid transparent;
+            border: 8px solid transparent;
             border-left-color: var(--primary);
             border-right: 0;
         }
 
         .chatbot-input {
-            padding: 1.25rem;
+            padding: 1rem;
             background: white;
             border-top: 1px solid var(--border);
             position: relative;
@@ -1492,19 +1739,20 @@
 
         .chatbot-input-group {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
             align-items: center;
         }
 
         .chatbot-input-field {
             flex: 1;
-            padding: 0.875rem 1.25rem;
+            padding: 0.75rem 1rem;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             font-family: 'Inter', sans-serif;
-            font-size: 0.9375rem;
+            font-size: 0.875rem;
             transition: var(--transition);
             background: var(--light-gray);
+            min-height: 44px;
         }
 
         .chatbot-input-field:focus {
@@ -1518,21 +1766,23 @@
             background: var(--gradient-primary);
             color: white;
             border: none;
-            width: 2.75rem;
-            height: 2.75rem;
+            width: 2.5rem;
+            height: 2.5rem;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.125rem;
-            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.2);
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .chatbot-send-btn:hover {
             transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+            box-shadow: 0 6px 16px rgba(0, 102, 255, 0.3);
         }
 
         .chatbot-send-btn:disabled {
@@ -1553,11 +1803,12 @@
             background: var(--light-gray);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 0.625rem 1rem;
-            font-size: 0.8125rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: var(--transition);
             color: var(--dark);
+            min-height: 36px;
         }
 
         .quick-response:hover {
@@ -1597,7 +1848,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.75rem;
             background: white;
             border-radius: var(--radius);
             border: 1px solid var(--border);
@@ -1606,8 +1857,8 @@
         }
 
         .chatbot-typing span {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: var(--gray);
             border-radius: 50%;
             animation: typing 1.4s infinite;
@@ -1627,16 +1878,16 @@
                 opacity: 0.5;
             }
             30% {
-                transform: translateY(-10px);
+                transform: translateY(-8px);
                 opacity: 1;
             }
         }
 
-        /* Footer */
+        /* Footer - Mobile Optimized */
         .footer {
             background: var(--darker);
             color: white;
-            padding: 5rem 0 2rem;
+            padding: clamp(3rem, 6vw, 5rem) 0 2rem;
             position: relative;
             overflow: hidden;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -1654,9 +1905,9 @@
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(2rem, 4vw, 4rem);
+            margin-bottom: clamp(2rem, 4vw, 4rem);
             position: relative;
             z-index: 1;
         }
@@ -1666,7 +1917,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .footer-links a {
@@ -1674,6 +1925,8 @@
             text-decoration: none;
             transition: var(--transition);
             font-size: 1rem;
+            display: inline-block;
+            padding: 0.25rem 0;
         }
 
         .footer-links a:hover {
@@ -1683,70 +1936,77 @@
 
         .copyright {
             text-align: center;
-            padding-top: 3rem;
+            padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9375rem;
+            font-size: 0.875rem;
             position: relative;
             z-index: 1;
+            line-height: 1.5;
         }
 
-        /* WhatsApp Float */
+        /* WhatsApp Float - Mobile Optimized */
         .whatsapp-float {
             position: fixed;
-            bottom: 7rem;
-            right: 2rem;
-            width: 4.5rem;
-            height: 4.5rem;
+            bottom: 6rem;
+            right: 1rem;
+            width: clamp(3.5rem, 8vw, 4.5rem);
+            height: clamp(3.5rem, 8vw, 4.5rem);
             background: linear-gradient(135deg, #25D366, #128C7E);
             border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 3vw, 1.75rem);
             text-decoration: none;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
             z-index: 1000;
             transition: var(--transition);
             border: 3px solid white;
             animation: bounce 2s infinite;
+            min-width: 44px;
+            min-height: 44px;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
         }
 
-        /* Book Consultation Button */
+        /* Book Consultation Button - Mobile Optimized */
         .book-consultation-btn {
             position: fixed;
-            top: 120px;
-            right: 2rem;
+            top: 80px;
+            right: 1rem;
             z-index: 999;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 1.75rem;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
             background: var(--gradient-primary);
             color: white;
             border: none;
             border-radius: var(--radius);
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 0.9375rem;
+            font-size: 0.875rem;
             text-decoration: none;
             transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
             animation: slideInRight 0.5s ease;
+            min-height: 44px;
+            max-width: 200px;
         }
 
         @keyframes slideInRight {
@@ -1762,114 +2022,71 @@
 
         .book-consultation-btn:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.4);
             background: linear-gradient(135deg, #0052CC 0%, #00B894 100%);
         }
 
-        /* Custom Arrow for Back Button */
-        .custom-arrow {
-            position: relative;
-            padding-right: 2.5rem;
-        }
-
-        .custom-arrow:after {
-            content: '→';
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: transform 0.3s ease;
-        }
-
-        .custom-arrow:hover:after {
-            transform: translateY(-50%) translateX(5px);
-        }
-
-        /* Hero Background Slides */
-        .hero-slides {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .hero-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .hero-slide.active {
-            opacity: 0.4;
-        }
-
-        /* Stats Section */
+        /* Stats Section - Mobile Optimized */
         .stats-section {
             background: linear-gradient(135deg, var(--darker), var(--dark));
             color: white;
-            padding: 4rem 0;
+            padding: clamp(2rem, 5vw, 4rem) 0;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+            gap: 1.5rem;
             text-align: center;
         }
 
         .stat-item {
-            padding: 2rem;
+            padding: 1.5rem 1rem;
             background: rgba(255, 255, 255, 0.05);
             border-radius: var(--radius);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .stat-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
             display: block;
+            line-height: 1;
         }
 
         .stat-label {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 500;
+            line-height: 1.4;
         }
 
-        /* Service Highlights */
+        /* Service Highlights - Mobile Optimized */
         .service-highlights {
-            margin: 4rem 0;
+            margin: clamp(2rem, 4vw, 4rem) 0;
         }
 
         .highlight-item {
             background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             border-top: 4px solid var(--primary);
             position: relative;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             transition: var(--transition);
         }
 
@@ -1880,10 +2097,10 @@
 
         .highlight-number {
             position: absolute;
-            top: -20px;
-            left: 20px;
-            width: 40px;
-            height: 40px;
+            top: -15px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
@@ -1892,29 +2109,30 @@
             color: white;
             font-weight: bold;
             box-shadow: var(--shadow);
-            font-size: 1.25rem;
+            font-size: 1rem;
         }
 
         .highlight-content {
-            margin-left: 3rem;
+            margin-left: 2.5rem;
         }
 
         .highlight-content h4 {
             color: var(--primary);
-            margin: 0 0 0.75rem 0;
-            font-size: 1.25rem;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.125rem;
         }
 
         .highlight-content p {
             color: var(--gray);
             line-height: 1.7;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9375rem;
         }
 
         .highlight-duration {
             background: rgba(0, 102, 255, 0.1);
             color: var(--primary);
-            padding: 0.25rem 0.75rem;
+            padding: 0.25rem 0.5rem;
             border-radius: var(--radius-full);
             font-size: 0.75rem;
             font-weight: 600;
@@ -1938,131 +2156,375 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            
-            .showcase-grid {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        /* Mobile Menu for Smaller Screens */
+        @media (max-width: 1024px) {
+            .nav-menu {
                 gap: 2rem;
-            }
-            
-            .process-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-            
-            .gallery-slider {
-                height: 400px;
             }
         }
 
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 2rem;
-                box-shadow: var(--shadow-lg);
-                border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-                z-index: 1001;
-            }
-
-            .nav-menu.show {
-                display: flex;
             }
 
             .mobile-menu-btn {
-                display: block;
+                display: flex;
             }
 
-            .hero h1 {
-                font-size: 2.25rem;
+            .hero {
+                padding-top: 60px;
             }
 
-            .hero .tagline {
-                font-size: 1.125rem;
+            .hero-content {
+                text-align: center;
             }
 
-            .professional-btn {
-                padding: 1rem 2rem;
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .professional-btn,
+            .explore-service-btn,
+            .back-to-service {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .gallery-controls {
+                position: absolute;
+                bottom: 1rem;
+                left: 0;
+                right: 0;
+                justify-content: space-between;
+                padding: 0 1rem;
+            }
+
+            .gallery-control {
+                width: 2.5rem;
+                height: 2.5rem;
                 font-size: 1rem;
             }
 
-            .process-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-slider {
-                height: 300px;
-            }
-
             .book-consultation-btn {
-                top: 100px;
-                right: 1rem;
-                padding: 0.75rem 1.25rem;
-                font-size: 0.875rem;
+                top: 70px;
+                right: 0.5rem;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+                max-width: 180px;
             }
 
-            .section {
-                padding: 4rem 0;
+            .whatsapp-float {
+                bottom: 5rem;
+                right: 0.5rem;
             }
 
-            .section-title h2 {
-                font-size: 1.875rem;
-            }
-
-            .service-details-header {
-                padding: 2rem;
-            }
-
-            .service-details-header h1 {
-                font-size: 2rem;
+            .chatbot-container {
+                bottom: 0.5rem;
+                right: 0.5rem;
             }
 
             .chatbot-window {
                 width: calc(100vw - 2rem);
-                right: 1rem;
-                height: 450px;
-            }
-
-            .whatsapp-float {
-                bottom: 6rem;
-                right: 1rem;
+                right: 0.5rem;
             }
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
+            .header {
+                padding: 0.25rem 0;
             }
-            
-            header {
+
+            .nav {
+                height: 50px;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .logo-text {
+                font-size: 1.125rem;
+            }
+
+            .logo-text span {
+                font-size: 0.625rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .hero p {
+                font-size: 0.875rem;
+            }
+
+            .professional-btn,
+            .explore-service-btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.875rem;
+            }
+
+            .section {
+                padding: 2.5rem 0;
+            }
+
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-title p {
+                font-size: 0.875rem;
+            }
+
+            .showcase-grid,
+            .process-grid,
+            .stats-grid,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .service-details-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .service-details-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .mobile-menu-content {
+                width: 85%;
+                max-width: none;
+            }
+
+            .contact-form {
+                padding: 1.25rem;
+            }
+
+            .contact-form h3 {
+                font-size: 1.25rem;
+            }
+
+            .form-control {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .back-nav {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            .highlight-content {
+                margin-left: 2rem;
+            }
+
+            .highlight-content h4 {
+                font-size: 1rem;
+            }
+
+            .highlight-content p {
+                font-size: 0.875rem;
+            }
+
+            .chatbot-toggle {
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.25rem;
+            }
+
+            .whatsapp-float {
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.25rem;
+            }
+
+            .book-consultation-btn {
+                font-size: 0.75rem;
+                padding: 0.5rem;
+                max-width: 160px;
+            }
+
+            .copyright {
+                font-size: 0.75rem;
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .professional-btn,
+            .explore-service-btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.8125rem;
+            }
+
+            .book-consultation-btn {
+                display: none;
+            }
+
+            .logo-text {
+                display: none;
+            }
+        }
+
+        /* Landscape Mode Optimizations */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 100px 0 50px;
+            }
+
+            .hero-content {
                 padding: 2rem 0;
             }
-            
-            header h1 {
-                font-size: 2rem;
+
+            .chatbot-window {
+                height: 300px;
             }
-            
-            .contact-info, .service-box {
-                padding: 2rem;
+
+            .gallery-slider {
+                height: 250px;
             }
-            
-            .btn {
-                padding: 15px 30px;
-                font-size: 1.05rem;
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--darker);
+                color: var(--light);
             }
-            
-            .image-3d {
-                width: 280px;
-                height: 190px;
+
+            .header {
+                background: rgba(15, 23, 42, 0.98);
+                border-bottom-color: rgba(30, 41, 59, 0.3);
+            }
+
+            .logo-text {
+                color: white;
+            }
+
+            .mobile-menu-content {
+                background: var(--dark);
+            }
+
+            .mobile-nav-link {
+                color: white;
+            }
+
+            .showcase-item,
+            .process-step {
+                background: var(--dark);
+                color: white;
+            }
+
+            .showcase-content h3,
+            .process-step h3 {
+                color: white;
+            }
+
+            .showcase-content p,
+            .process-step p {
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .contact-modal-content {
+                background: var(--dark);
+            }
+
+            .contact-modal-header h3 {
+                color: white;
+            }
+
+            .contact-info-item {
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .contact-info-content h4 {
+                color: white;
+            }
+
+            .contact-info-content p {
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .header,
+            .book-consultation-btn,
+            .whatsapp-float,
+            .chatbot-container,
+            .footer {
+                display: none !important;
+            }
+
+            .hero,
+            .service-details-page {
+                min-height: auto;
+                padding: 0;
+            }
+
+            .section {
+                padding: 2rem 0;
+                page-break-inside: avoid;
+            }
+
+            body {
+                color: #000;
+                background: #fff;
+            }
+
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+
+            .professional-btn,
+            .explore-service-btn,
+            .back-to-service {
+                border: 1px solid #000;
+                background: none;
+                color: #000;
+            }
+        }
+
+        /* Performance Optimizations */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            .professional-btn,
+            .explore-service-btn,
+            .back-to-service {
+                border: 3px solid currentColor;
+            }
+
+            .nav-link.active:after {
+                height: 4px;
+            }
+
+            .form-control:focus {
+                outline: 3px solid var(--primary);
             }
         }
 
@@ -2082,46 +2544,13 @@
             opacity: 0;
             animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-
-        /* Additional page styling for demonstration */
-        .page-title {
-            text-align: center;
-            margin: 2rem 0 3rem;
-            color: var(--primary-color);
-            font-size: 2.5rem;
-        }
-
-        .pages-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .page-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .page-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .page-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
     </style>
 </head>
 <body ng-cloak>
     <!-- Book Consultation Button -->
-    <button class="book-consultation-btn" ng-click="showContactModal()">
+    <button class="book-consultation-btn" ng-click="showContactModal()" aria-label="Book a free consultation">
         <i class="fas fa-calendar-check"></i>
-        Book Consultation
+        <span class="btn-text">Book Consultation</span>
     </button>
 
     <!-- WhatsApp Float Button -->
@@ -2130,20 +2559,28 @@
        class="whatsapp-float"
        ng-mouseenter="animateWhatsApp = true"
        ng-mouseleave="animateWhatsApp = false"
-       ng-class="{'animate__animated animate__pulse': animateWhatsApp}">
+       ng-class="{'animate__animated animate__pulse': animateWhatsApp}"
+       aria-label="Chat with us on WhatsApp"
+       rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Enhanced Professional Chatbot -->
     <div class="chatbot-container">
-        <div class="chatbot-toggle" ng-click="toggleChatbot()" ng-class="{'unread': hasUnreadMessages}">
+        <div class="chatbot-toggle" 
+             ng-click="toggleChatbot()" 
+             ng-class="{'unread': hasUnreadMessages}"
+             aria-label="Open chat assistant"
+             role="button"
+             tabindex="0"
+             ng-keydown="$event.keyCode === 13 && toggleChatbot()">
             <i class="fas fa-headset"></i>
         </div>
         
-        <div class="chatbot-window" ng-class="{'active': chatbotActive}">
+        <div class="chatbot-window" ng-class="{'active': chatbotActive}" role="dialog" aria-label="Digital Solutions AI Assistant">
             <div class="chatbot-header">
                 <div class="chatbot-header-content">
-                    <div class="chatbot-avatar">
+                    <div class="chatbot-avatar" aria-hidden="true">
                         <i class="fas fa-headset"></i>
                     </div>
                     <div>
@@ -2151,16 +2588,18 @@
                         <div class="chatbot-status">Online • Ready to help</div>
                     </div>
                 </div>
-                <button class="chatbot-close" ng-click="toggleChatbot()">
+                <button class="chatbot-close" ng-click="toggleChatbot()" aria-label="Close chat">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             
-            <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chatbot-messages" id="chatbotMessages" role="log" aria-live="polite">
                 <div ng-repeat="message in chatMessages" 
                      class="chatbot-message" 
-                     ng-class="message.sender">
-                    <div ng-if="message.isTyping" class="chatbot-typing">
+                     ng-class="message.sender"
+                     role="article"
+                     aria-label="{{message.sender === 'bot' ? 'Assistant message' : 'Your message'}}">
+                    <div ng-if="message.isTyping" class="chatbot-typing" aria-label="Assistant is typing">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -2177,25 +2616,46 @@
                            ng-model="chatInput"
                            ng-keypress="$event.keyCode === 13 && sendChatMessage()"
                            ng-focus="focusChatInput()"
-                           ng-disabled="isBotTyping">
-                    <button class="chatbot-send-btn" ng-click="sendChatMessage()" ng-disabled="!chatInput.trim() || isBotTyping">
+                           ng-disabled="isBotTyping"
+                           aria-label="Type your message"
+                           autocomplete="off">
+                    <button class="chatbot-send-btn" 
+                            ng-click="sendChatMessage()" 
+                            ng-disabled="!chatInput.trim() || isBotTyping"
+                            aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
                 
                 <div class="chatbot-suggestions" ng-show="showChatSuggestions">
                     <h5>Quick suggestions:</h5>
-                    <div class="quick-responses">
-                        <div class="quick-response" ng-click="quickResponse('Tell me about your services')">
+                    <div class="quick-responses" role="list">
+                        <div class="quick-response" 
+                             ng-click="quickResponse('Tell me about your services')"
+                             role="listitem"
+                             tabindex="0"
+                             ng-keydown="$event.keyCode === 13 && quickResponse('Tell me about your services')">
                             Our Services
                         </div>
-                        <div class="quick-response" ng-click="quickResponse('How to get started?')">
+                        <div class="quick-response" 
+                             ng-click="quickResponse('How to get started?')"
+                             role="listitem"
+                             tabindex="0"
+                             ng-keydown="$event.keyCode === 13 && quickResponse('How to get started?')">
                             Get Started
                         </div>
-                        <div class="quick-response" ng-click="quickResponse('Pricing information')">
+                        <div class="quick-response" 
+                             ng-click="quickResponse('Pricing information')"
+                             role="listitem"
+                             tabindex="0"
+                             ng-keydown="$event.keyCode === 13 && quickResponse('Pricing information')">
                             Pricing
                         </div>
-                        <div class="quick-response" ng-click="quickResponse('Contact information')">
+                        <div class="quick-response" 
+                             ng-click="quickResponse('Contact information')"
+                             role="listitem"
+                             tabindex="0"
+                             ng-keydown="$event.keyCode === 13 && quickResponse('Contact information')">
                             Contact Info
                         </div>
                     </div>
@@ -2204,10 +2664,37 @@
         </div>
     </div>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" ng-class="{'active': mobileMenuOpen}" ng-click="closeMobileMenu()">
+        <div class="mobile-menu-content" ng-click="$event.stopPropagation()">
+            <button class="mobile-menu-close" ng-click="closeMobileMenu()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <ul class="mobile-nav-menu">
+                <li ng-repeat="item in menuItems">
+                    <a href="{{'#' + item.id}}" 
+                       class="mobile-nav-link" 
+                       ng-click="scrollTo(item.id); closeMobileMenu()"
+                       ng-class="{'active': activeSection === item.id}">
+                        <i class="fas" ng-class="getMenuIcon(item.id)"></i>
+                        {{item.name}}
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="mobile-nav-link" ng-click="showContactModal(); closeMobileMenu()">
+                        <i class="fas fa-phone"></i>
+                        Contact Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <!-- Contact Info Modal -->
     <div class="contact-modal-overlay" ng-class="{'active': showContactInfo}" ng-click="closeContactModal($event)">
         <div class="contact-modal-content" ng-click="$event.stopPropagation()">
-            <button class="contact-modal-close" ng-click="closeContactModal()">
+            <button class="contact-modal-close" ng-click="closeContactModal()" aria-label="Close contact modal">
                 <i class="fas fa-times"></i>
             </button>
             
@@ -2218,7 +2705,12 @@
             
             <div class="contact-info-grid">
                 <!-- Email Section - Clickable -->
-                <div class="contact-info-item" id="email-section" ng-click="scrollToSection('email-section')">
+                <div class="contact-info-item" 
+                     id="email-section" 
+                     ng-click="scrollToSection('email-section')"
+                     role="button"
+                     tabindex="0"
+                     ng-keydown="$event.keyCode === 13 && scrollToSection('email-section')">
                     <div class="contact-info-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
@@ -2229,18 +2721,28 @@
                 </div>
                 
                 <!-- WhatsApp Section - Clickable -->
-                <div class="contact-info-item" id="whatsapp-section" ng-click="scrollToSection('whatsapp-section')">
+                <div class="contact-info-item" 
+                     id="whatsapp-section" 
+                     ng-click="scrollToSection('whatsapp-section')"
+                     role="button"
+                     tabindex="0"
+                     ng-keydown="$event.keyCode === 13 && scrollToSection('whatsapp-section')">
                     <div class="contact-info-icon" style="background: linear-gradient(135deg, #25D366, #128C7E);">
                         <i class="fab fa-whatsapp"></i>
                     </div>
                     <div class="contact-info-content">
                         <h4>WhatsApp</h4>
-                        <p><a href="https://wa.me/923472740080" target="_blank">+92 347 2740080</a></p>
+                        <p><a href="https://wa.me/923472740080" target="_blank" rel="noopener noreferrer">+92 347 2740080</a></p>
                     </div>
                 </div>
                 
                 <!-- CEO Section - Clickable -->
-                <div class="contact-info-item" id="ceo-section" ng-click="scrollToSection('ceo-section')">
+                <div class="contact-info-item" 
+                     id="ceo-section" 
+                     ng-click="scrollToSection('ceo-section')"
+                     role="button"
+                     tabindex="0"
+                     ng-keydown="$event.keyCode === 13 && scrollToSection('ceo-section')">
                     <div class="contact-info-icon" style="background: var(--gradient-primary);">
                         <i class="fas fa-user-tie"></i>
                     </div>
@@ -2251,7 +2753,12 @@
                 </div>
                 
                 <!-- Service Area - Clickable -->
-                <div class="contact-info-item" id="service-area" ng-click="scrollToSection('service-area')">
+                <div class="contact-info-item" 
+                     id="service-area" 
+                     ng-click="scrollToSection('service-area')"
+                     role="button"
+                     tabindex="0"
+                     ng-keydown="$event.keyCode === 13 && scrollToSection('service-area')">
                     <div class="contact-info-icon" style="background: var(--gradient-accent);">
                         <i class="fas fa-globe"></i>
                     </div>
@@ -2274,29 +2781,32 @@
     <!-- Main Website View -->
     <div ng-show="!showServiceDetails">
         <!-- Header -->
-        <header class="header" ng-class="{'scrolled': isScrolled}">
+        <header class="header" ng-class="{'scrolled': isScrolled}" role="banner">
             <div class="container">
-                <nav class="nav">
-                    <a href="#home" class="logo" ng-click="scrollTo('home')">
-                        <div class="logo-icon">DS</div>
+                <nav class="nav" role="navigation" aria-label="Main navigation">
+                    <a href="#home" class="logo" ng-click="scrollTo('home')" aria-label="Digital Solutions - Home">
+                        <div class="logo-icon" aria-hidden="true">DS</div>
                         <div class="logo-text">
                             Digital Solutions
                             <span>Transform Your Digital Presence</span>
                         </div>
                     </a>
 
-                    <ul class="nav-menu" ng-class="{'show': mobileMenuOpen && windowWidth <= 768}">
-                        <li ng-repeat="item in menuItems">
+                    <ul class="nav-menu" ng-class="{'show': mobileMenuOpen && windowWidth <= 768}" role="menubar">
+                        <li ng-repeat="item in menuItems" role="none">
                             <a href="{{'#' + item.id}}" 
                                class="nav-link" 
                                ng-click="scrollTo(item.id)"
-                               ng-class="{'active': activeSection === item.id}">
-                                {{item.name}}
+                               ng-class="{'active': activeSection === item.id}"
+                               role="menuitem"
+                               tabindex="0">
+                                <i class="fas" ng-class="getMenuIcon(item.id)"></i>
+                                <span class="nav-text">{{item.name}}</span>
                             </a>
                         </li>
                     </ul>
 
-                    <button class="mobile-menu-btn" ng-click="toggleMobileMenu()">
+                    <button class="mobile-menu-btn" ng-click="toggleMobileMenu()" aria-label="Toggle menu" aria-expanded="{{mobileMenuOpen}}">
                         <i class="fas" ng-class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
                     </button>
                 </nav>
@@ -2304,16 +2814,18 @@
         </header>
 
         <!-- Hero Section with Auto-scrolling Background -->
-        <section id="home" class="hero">
-            <div class="hero-background-slider">
+        <section id="home" class="hero" role="region" aria-label="Hero section">
+            <div class="hero-background-slider" aria-hidden="true">
                 <div class="hero-slide" 
                      ng-repeat="slide in heroSlides" 
                      ng-class="{'active': currentHeroSlide === $index}"
-                     style="background-image: url('{{slide.image}}')">
+                     style="background-image: url('{{slide.image}}')"
+                     role="img"
+                     aria-label="{{slide.title}}">
                 </div>
             </div>
             
-            <div class="hero-overlay"></div>
+            <div class="hero-overlay" aria-hidden="true"></div>
             
             <div class="container">
                 <div class="hero-content">
@@ -2321,16 +2833,23 @@
                     <div class="tagline animate__animated animate__fadeInDown animate__delay-1s">Advanced Digital Solutions for Modern Enterprises</div>
                     <p class="animate__animated animate__fadeIn animate__delay-2s">We provide comprehensive digital transformation services that drive growth, enhance visibility, and maximize ROI through cutting-edge technology and strategic expertise. With 60% conversion increase and 24K+ projects delivered.</p>
                     
-                    <!-- Enhanced Professional Button without arrow icon -->
-                    <button class="explore-service-btn animate__animated animate__fadeInUp animate__delay-3s" ng-click="scrollTo('showcase')">
-                        Explore Our Services
-                    </button>
+                    <div class="btn-group">
+                        <!-- Enhanced Professional Button -->
+                        <button class="explore-service-btn animate__animated animate__fadeInUp animate__delay-3s" ng-click="scrollTo('showcase')">
+                            Explore Our Services
+                        </button>
+                        
+                        <button class="professional-btn animate__animated animate__fadeInUp animate__delay-3s" ng-click="showContactModal()">
+                            <i class="fas fa-calendar-check btn-icon"></i>
+                            Get Free Consultation
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Stats Section -->
-        <section class="stats-section">
+        <section class="stats-section" role="region" aria-label="Statistics">
             <div class="container">
                 <div class="stats-grid">
                     <div class="stat-item">
@@ -2354,8 +2873,8 @@
         </section>
 
         <!-- Services Showcase -->
-        <section id="showcase" class="section services-showcase">
-            <div class="services-3d-bg"></div>
+        <section id="showcase" class="section services-showcase" role="region" aria-label="Our services">
+            <div class="services-3d-bg" aria-hidden="true"></div>
             
             <div class="container">
                 <div class="section-title">
@@ -2370,7 +2889,11 @@
                          ng-mouseenter="hoverService = service.id"
                          ng-mouseleave="hoverService = null"
                          data-aos="fade-up"
-                         data-aos-delay="{{$index * 100}}">
+                         data-aos-delay="{{$index * 100}}"
+                         role="article"
+                         tabindex="0"
+                         ng-keydown="$event.keyCode === 13 && viewServiceDetails(service)"
+                         aria-label="Learn more about {{service.title}}">
                         <div class="showcase-image">
                             <img ng-src="{{service.cardImage}}" alt="{{service.title}} - Digital Solutions" loading="lazy">
                             <div class="showcase-overlay">
@@ -2386,7 +2909,6 @@
                                 <h3>{{service.title}}</h3>
                             </div>
                             <p>{{service.description}}</p>
-                            <!-- Enhanced Professional Button without arrow -->
                             <button class="explore-service-btn" ng-click="viewServiceDetails(service)">
                                 Explore Service
                             </button>
@@ -2397,8 +2919,8 @@
         </section>
 
         <!-- Our Implementation Process -->
-        <section id="process" class="section process-section">
-            <div class="process-3d-bg"></div>
+        <section id="process" class="section process-section" role="region" aria-label="Our process">
+            <div class="process-3d-bg" aria-hidden="true"></div>
             
             <div class="container">
                 <div class="section-title">
@@ -2411,7 +2933,11 @@
                          ng-click="showContactModal()"
                          ng-mouseenter="hoverStep = 1"
                          ng-mouseleave="hoverStep = null"
-                         data-aos="fade-up">
+                         data-aos="fade-up"
+                         role="article"
+                         tabindex="0"
+                         ng-keydown="$event.keyCode === 13 && showContactModal()"
+                         aria-label="Start discovery and analysis process">
                         <div class="process-step-number">1</div>
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                             <div style="width: 3rem; height: 3rem; background: var(--gradient-primary); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
@@ -2429,7 +2955,12 @@
                          ng-click="showContactModal()"
                          ng-mouseenter="hoverStep = 2"
                          ng-mouseleave="hoverStep = null"
-                         data-aos="fade-up" data-aos-delay="100">
+                         data-aos="fade-up" 
+                         data-aos-delay="100"
+                         role="article"
+                         tabindex="0"
+                         ng-keydown="$event.keyCode === 13 && showContactModal()"
+                         aria-label="Develop digital strategy">
                         <div class="process-step-number">2</div>
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                             <div style="width: 3rem; height: 3rem; background: var(--gradient-primary); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
@@ -2447,7 +2978,12 @@
                          ng-click="showContactModal()"
                          ng-mouseenter="hoverStep = 3"
                          ng-mouseleave="hoverStep = null"
-                         data-aos="fade-up" data-aos-delay="200">
+                         data-aos="fade-up" 
+                         data-aos-delay="200"
+                         role="article"
+                         tabindex="0"
+                         ng-keydown="$event.keyCode === 13 && showContactModal()"
+                         aria-label="Start implementation process">
                         <div class="process-step-number">3</div>
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                             <div style="width: 3rem; height: 3rem; background: var(--gradient-primary); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
@@ -2465,7 +3001,12 @@
                          ng-click="showContactModal()"
                          ng-mouseenter="hoverStep = 4"
                          ng-mouseleave="hoverStep = null"
-                         data-aos="fade-up" data-aos-delay="300">
+                         data-aos="fade-up" 
+                         data-aos-delay="300"
+                         role="article"
+                         tabindex="0"
+                         ng-keydown="$event.keyCode === 13 && showContactModal()"
+                         aria-label="Optimize business growth">
                         <div class="process-step-number">4</div>
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                             <div style="width: 3rem; height: 3rem; background: var(--gradient-primary); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
@@ -2483,8 +3024,8 @@
         </section>
 
         <!-- Interactive Gallery with 3D Images -->
-        <section id="gallery" class="section gallery-section">
-            <div class="gallery-3d-bg"></div>
+        <section id="gallery" class="section gallery-section" role="region" aria-label="Project gallery">
+            <div class="gallery-3d-bg" aria-hidden="true"></div>
             
             <div class="container">
                 <div class="section-title">
@@ -2493,11 +3034,15 @@
                 </div>
                 
                 <div class="gallery-container">
-                    <div class="gallery-slider">
+                    <div class="gallery-slider" aria-label="Project slideshow">
                         <div ng-repeat="service in services" 
                              class="gallery-slide"
                              ng-class="{'active': activeGallerySlide === $index, 'previous': previousGallerySlide === $index}"
-                             ng-click="viewServiceDetails(service)">
+                             ng-click="viewServiceDetails(service)"
+                             role="article"
+                             tabindex="0"
+                             ng-keydown="$event.keyCode === 13 && viewServiceDetails(service)"
+                             aria-label="View {{service.title}} project details">
                             <img ng-src="{{service.galleryImage}}" alt="{{service.title}} Project - Digital Solutions" class="gallery-image" loading="lazy">
                             <div class="gallery-overlay">
                                 <h3>{{service.title}}</h3>
@@ -2510,27 +3055,30 @@
                     </div>
                     
                     <div class="gallery-controls">
-                        <button class="gallery-control" ng-click="prevGallerySlide()">
+                        <button class="gallery-control" ng-click="prevGallerySlide()" aria-label="Previous slide">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="gallery-control" ng-click="nextGallerySlide()">
+                        <button class="gallery-control" ng-click="nextGallerySlide()" aria-label="Next slide">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
                     
-                    <div class="gallery-dots">
+                    <div class="gallery-dots" role="tablist" aria-label="Gallery navigation dots">
                         <button ng-repeat="service in services" 
                                 class="gallery-dot"
                                 ng-class="{'active': activeGallerySlide === $index}"
-                                ng-click="goToGallerySlide($index)"></button>
+                                ng-click="goToGallerySlide($index)"
+                                role="tab"
+                                aria-label="Go to slide {{$index + 1}}"
+                                aria-selected="{{activeGallerySlide === $index}}"></button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="section contact-section">
-            <div class="contact-3d-bg"></div>
+        <section id="contact" class="section contact-section" role="region" aria-label="Contact form">
+            <div class="contact-3d-bg" aria-hidden="true"></div>
             
             <div class="container">
                 <div class="section-title">
@@ -2544,32 +3092,43 @@
                     
                     <form name="contactForm" ng-submit="submitForm()" novalidate>
                         <div class="form-group">
+                            <label for="name" class="sr-only">Your Name</label>
                             <input type="text" 
+                                   id="name"
                                    class="form-control" 
                                    placeholder="Your Name"
                                    ng-model="formData.name"
-                                   required>
+                                   required
+                                   aria-required="true">
                         </div>
                         
                         <div class="form-group">
+                            <label for="email" class="sr-only">Email Address</label>
                             <input type="email" 
+                                   id="email"
                                    class="form-control" 
                                    placeholder="Email Address"
                                    ng-model="formData.email"
-                                   required>
+                                   required
+                                   aria-required="true">
                         </div>
                         
                         <div class="form-group">
-                            <input type="text" 
+                            <label for="phone" class="sr-only">Phone Number</label>
+                            <input type="tel" 
+                                   id="phone"
                                    class="form-control" 
                                    placeholder="Phone Number"
                                    ng-model="formData.phone">
                         </div>
                         
                         <div class="form-group">
-                            <select class="form-control" 
+                            <label for="service" class="sr-only">Select Service Interest</label>
+                            <select id="service"
+                                    class="form-control" 
                                     ng-model="formData.service"
                                     required
+                                    aria-required="true"
                                     style="color: white;">
                                 <option value="" style="color: var(--gray);">Select Service Interest</option>
                                 <option ng-repeat="service in services" value="{{service.title}}" style="color: var(--dark);">
@@ -2579,16 +3138,20 @@
                         </div>
                         
                         <div class="form-group">
-                            <textarea class="form-control" 
+                            <label for="message" class="sr-only">Your Message</label>
+                            <textarea id="message"
+                                      class="form-control" 
                                       placeholder="Tell us about your business goals and challenges..."
                                       ng-model="formData.message"
-                                      required></textarea>
+                                      required
+                                      aria-required="true"></textarea>
                         </div>
                         
                         <button type="submit" 
                                 class="professional-btn" 
                                 style="width: 100%; margin-top: 1rem;"
-                                ng-disabled="contactForm.$invalid || submitting">
+                                ng-disabled="contactForm.$invalid || submitting"
+                                aria-label="Submit consultation request">
                             <span ng-show="!submitting">
                                 <i class="fas fa-paper-plane btn-icon"></i> Request Free Consultation
                             </span>
@@ -2602,14 +3165,14 @@
         </section>
 
         <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-3d-bg"></div>
+        <footer class="footer" role="contentinfo">
+            <div class="footer-3d-bg" aria-hidden="true"></div>
             
             <div class="container">
                 <div class="footer-content">
                     <div>
                         <div class="logo" style="margin-bottom: 1.5rem;">
-                            <div class="logo-icon">DS</div>
+                            <div class="logo-icon" aria-hidden="true">DS</div>
                             <div class="logo-text" style="color: white;">
                                 Digital Solutions
                                 <span style="color: rgba(255, 255, 255, 0.7);">Digital Transformation Experts</span>
@@ -2626,6 +3189,7 @@
                             <li ng-repeat="item in menuItems">
                                 <a href="{{'#' + item.id}}" ng-click="scrollTo(item.id)">{{item.name}}</a>
                             </li>
+                            <li><a href="#" ng-click="showContactModal()">Contact Us</a></li>
                         </ul>
                     </div>
                     
@@ -2642,7 +3206,7 @@
                         <h4 style="color: white; margin-bottom: 1.5rem; font-size: 1.25rem;">Contact Info</h4>
                         <ul class="footer-links">
                             <li><a href="mailto:syedsikandarshah963@gmail.com">syedsikandarshah963@gmail.com</a></li>
-                            <li><a href="https://wa.me/923472740080" target="_blank">WhatsApp: +92 347 2740080</a></li>
+                            <li><a href="https://wa.me/923472740080" target="_blank" rel="noopener noreferrer">WhatsApp: +92 347 2740080</a></li>
                             <li style="color: rgba(255, 255, 255, 0.7);">CEO: Syed Sikandar Shah</li>
                             <li style="color: rgba(255, 255, 255, 0.7);">Global Digital Solutions Provider</li>
                         </ul>
@@ -2659,28 +3223,35 @@
     <!-- Service Details Page View -->
     <div ng-show="showServiceDetails" class="service-details-page">
         <!-- Auto-scrolling Background for Service Details -->
-        <div class="service-background-slider">
+        <div class="service-background-slider" aria-hidden="true">
             <div class="service-background-slide"
                  ng-repeat="slide in selectedService.backgroundSlides"
                  ng-class="{'active': currentServiceSlide === $index}"
-                 style="background-image: url('{{slide}}')">
+                 style="background-image: url('{{slide}}')"
+                 role="img"
+                 aria-label="Service background image {{$index + 1}}">
             </div>
         </div>
         
         <div class="container service-details-container">
             <!-- Back Navigation with Enhanced Button Shape -->
-            <div class="back-nav" ng-click="backToServices()">
+            <div class="back-nav" 
+                 ng-click="backToServices()"
+                 role="button"
+                 tabindex="0"
+                 ng-keydown="$event.keyCode === 13 && backToServices()"
+                 aria-label="Back to all services">
                 <i class="fas fa-arrow-left"></i>
                 <span style="font-weight: 600; color: var(--dark);">Back to All Services</span>
             </div>
 
             <div class="service-details-header" ng-if="selectedService">
                 <div class="service-details-header-content">
-                    <div class="service-icon-large">
+                    <div class="service-icon-large" aria-hidden="true">
                         <i class="fas" ng-class="selectedService.icon"></i>
                     </div>
                     <h1>{{selectedService.title}}</h1>
-                    <p style="font-size: 1.25rem; line-height: 1.8; max-width: 800px; margin: 0 auto; color: white;">
+                    <p style="font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.8; max-width: 800px; margin: 0 auto; color: white;">
                         {{selectedService.fullDescription}}
                     </p>
                 </div>
@@ -2688,29 +3259,29 @@
 
             <div ng-if="selectedService" style="position: relative; z-index: 2;">
                 <!-- Service Stats -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 3rem 0;">
-                    <div style="background: rgba(255, 255, 255, 0.9); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; backdrop-filter: blur(10px);">
-                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">60%</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 1rem; margin: 2rem 0;">
+                    <div style="background: rgba(255, 255, 255, 0.9); padding: 1rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">60%</div>
                         <div style="color: var(--gray); font-size: 0.875rem;">Average Conversion Increase</div>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.9); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; backdrop-filter: blur(10px);">
-                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">24K+</div>
+                    <div style="background: rgba(255, 255, 255, 0.9); padding: 1rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">24K+</div>
                         <div style="color: var(--gray); font-size: 0.875rem;">Projects Successfully Delivered</div>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.9); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; backdrop-filter: blur(10px);">
-                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">99%</div>
+                    <div style="background: rgba(255, 255, 255, 0.9); padding: 1rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">99%</div>
                         <div style="color: var(--gray); font-size: 0.875rem;">Client Satisfaction Rate</div>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.9); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; backdrop-filter: blur(10px);">
-                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">48h</div>
+                    <div style="background: rgba(255, 255, 255, 0.9); padding: 1rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">48h</div>
                         <div style="color: var(--gray); font-size: 0.875rem;">Average Response Time</div>
                     </div>
                 </div>
 
                 <!-- Service Highlights -->
                 <div class="service-highlights">
-                    <h2 style="font-size: 2rem; margin-bottom: 2rem; color: white; text-align: center;">Service Highlights</h2>
-                    <div class="highlight-item" ng-repeat="highlight in selectedService.highlights">
+                    <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1.5rem; color: white; text-align: center;">Service Highlights</h2>
+                    <div class="highlight-item" ng-repeat="highlight in selectedService.highlights" role="article">
                         <div class="highlight-number">{{$index + 1}}</div>
                         <div class="highlight-content">
                             <h4>{{highlight.title}}</h4>
@@ -2723,21 +3294,21 @@
                 </div>
 
                 <!-- Call to Action -->
-                <div style="text-align: center; margin: 4rem 0; padding: 3rem; background: rgba(0, 102, 255, 0.9); color: white; border-radius: var(--radius-xl); backdrop-filter: blur(10px);">
-                    <h2 style="color: white; margin-bottom: 1rem; font-size: 2rem;">Ready to Transform Your Business?</h2>
-                    <p style="color: rgba(255, 255, 255, 0.9); margin: 1rem 0 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.125rem;">
+                <div style="text-align: center; margin: clamp(2rem, 4vw, 4rem) 0; padding: clamp(1.5rem, 3vw, 3rem); background: rgba(0, 102, 255, 0.9); color: white; border-radius: var(--radius-xl); backdrop-filter: blur(10px);">
+                    <h2 style="color: white; margin-bottom: 1rem; font-size: clamp(1.5rem, 3vw, 2rem);">Ready to Transform Your Business?</h2>
+                    <p style="color: rgba(255, 255, 255, 0.9); margin: 1rem 0 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: clamp(1rem, 2vw, 1.125rem);">
                         Let's discuss how our {{selectedService.title}} solutions can drive your business growth.
                     </p>
-                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <button class="professional-btn btn-large" ng-click="showContactModal()">
+                    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                        <button class="professional-btn" ng-click="showContactModal()">
                             <i class="fas fa-calendar-check btn-icon"></i> Book Free Consultation
                         </button>
                         <a href="https://wa.me/923472740080?text=Hi%20Digital%20Solutions!%20I'm%20interested%20in%20your%20{{selectedService.title | encodeURI}}%20services.%20Can%20we%20discuss%20how%20you%20can%20help%20my%20business?" 
                            target="_blank" 
-                           class="professional-btn btn-whatsapp btn-large">
+                           class="professional-btn btn-whatsapp"
+                           rel="noopener noreferrer">
                             <i class="fab fa-whatsapp btn-icon"></i> Chat on WhatsApp
                         </a>
-                        <!-- Enhanced Back to Service Button -->
                         <button class="back-to-service" ng-click="backToServices()">
                             <i class="fas fa-arrow-left"></i> Back to Services
                         </button>
@@ -2783,6 +3354,20 @@
             $scope.isBotTyping = false;
             $scope.currentHeroSlide = 0;
             $scope.currentServiceSlide = 0;
+            $scope.previousGallerySlide = null;
+            $scope.activeGallerySlide = 0;
+            
+            // Get menu icon based on section
+            $scope.getMenuIcon = function(sectionId) {
+                const icons = {
+                    'home': 'fa-home',
+                    'showcase': 'fa-rocket',
+                    'process': 'fa-cogs',
+                    'gallery': 'fa-images',
+                    'contact': 'fa-phone'
+                };
+                return icons[sectionId] || 'fa-circle';
+            };
             
             // Scroll to section function for contact modal
             $scope.scrollToSection = function(sectionId) {
@@ -2805,7 +3390,7 @@
                 }
             };
             
-            // Hero background slides (20+ images)
+            // Hero background slides
             $scope.heroSlides = [
                 {
                     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
@@ -2822,45 +3407,20 @@
                 {
                     image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
                     title: 'Digital Excellence'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                    title: 'Data Analytics'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                    title: 'Web Development'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                    title: 'E-commerce Solutions'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                    title: 'SEO Optimization'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                    title: 'Digital Marketing'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                    title: 'Social Media'
                 }
             ];
             
-            // Auto gallery slide rotation
-            $scope.activeGallerySlide = 0;
-            $scope.previousGallerySlide = null;
-            
             // Initialize AOS animations
             $timeout(function() {
-                AOS.init({
-                    duration: 1000,
-                    once: true,
-                    offset: 100
-                });
-            });
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({
+                        duration: 800,
+                        once: true,
+                        offset: 50,
+                        disable: $scope.windowWidth < 768
+                    });
+                }
+            }, 100);
             
             // Menu items
             $scope.menuItems = [
@@ -2871,26 +3431,20 @@
                 { id: 'contact', name: 'Contact' }
             ];
             
-            // Enhanced Services data with 20+ background images for each service
+            // Enhanced Services data
             $scope.services = [
                 {
                     id: 'digital-marketing',
                     title: 'Digital Marketing',
                     description: 'Advanced digital marketing strategies that drive growth and maximize ROI through data-driven campaigns and targeted advertising.',
                     overview: 'Strategic campaigns that increase brand visibility and drive conversions across all digital channels.',
-                    fullDescription: 'Our digital marketing services provide end-to-end solutions for businesses looking to establish a strong online presence and drive sustainable growth. We combine data-driven strategies with creative excellence to deliver campaigns that resonate with your target audience and achieve measurable results. With expertise in SEO, PPC, social media marketing, and content strategy, we help businesses reach their ideal customers and convert them into loyal clients.',
+                    fullDescription: 'Our digital marketing services provide end-to-end solutions for businesses looking to establish a strong online presence and drive sustainable growth. We combine data-driven strategies with creative excellence to deliver campaigns that resonate with your target audience and achieve measurable results.',
                     icon: 'fa-bullhorn',
                     cardImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                     galleryImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
                     backgroundSlides: [
                         'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+                        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
                     ],
                     galleryDescription: 'Comprehensive digital marketing strategies for business growth and brand visibility.',
                     highlights: [
@@ -2903,16 +3457,6 @@
                             title: 'Multi-Channel Campaigns',
                             description: 'Integrated campaigns across all digital platforms for maximum reach and engagement.',
                             duration: 'Ongoing'
-                        },
-                        {
-                            title: 'Performance Analytics',
-                            description: 'Real-time tracking and optimization for maximum ROI and campaign effectiveness.',
-                            duration: 'Continuous'
-                        },
-                        {
-                            title: 'Conversion Optimization',
-                            description: 'Continuous improvement of conversion rates and user experience across all touchpoints.',
-                            duration: '4-8 weeks'
                         }
                     ]
                 },
@@ -2921,19 +3465,13 @@
                     title: 'Web Development',
                     description: 'Custom web solutions built with cutting-edge technology and best practices for optimal performance and user experience.',
                     overview: 'Responsive websites and applications designed for optimal user experience and business growth.',
-                    fullDescription: 'Our web development services focus on creating robust, scalable, and high-performance digital solutions that provide exceptional user experiences. We utilize the latest technologies and frameworks to build websites and applications that drive business growth and digital transformation. From custom web applications to e-commerce platforms, we deliver solutions that are secure, fast, and optimized for search engines.',
+                    fullDescription: 'Our web development services focus on creating robust, scalable, and high-performance digital solutions that provide exceptional user experiences. We utilize the latest technologies and frameworks to build websites and applications that drive business growth and digital transformation.',
                     icon: 'fa-code',
                     cardImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                     galleryImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
                     backgroundSlides: [
                         'https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+                        'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
                     ],
                     galleryDescription: 'Advanced web development solutions for modern businesses and digital transformation.',
                     highlights: [
@@ -2946,16 +3484,6 @@
                             title: 'Responsive Design',
                             description: 'Mobile-first approach for optimal device compatibility and user experience.',
                             duration: '2-4 weeks'
-                        },
-                        {
-                            title: 'Performance Optimization',
-                            description: 'Fast loading and smooth user experience through advanced optimization techniques.',
-                            duration: '1-2 weeks'
-                        },
-                        {
-                            title: 'Security Implementation',
-                            description: 'Enterprise-grade security for data protection and compliance requirements.',
-                            duration: 'Continuous'
                         }
                     ]
                 },
@@ -2964,19 +3492,13 @@
                     title: 'SEO Optimization',
                     description: 'Advanced SEO strategies to dominate search rankings and drive organic growth through technical optimization and content strategy.',
                     overview: 'Comprehensive SEO solutions for improved search visibility and organic traffic growth.',
-                    fullDescription: 'Our SEO optimization services combine technical expertise with strategic content development to improve your search engine rankings and drive sustainable organic growth. We implement comprehensive SEO strategies that deliver long-term results and measurable business impact. From keyword research and on-page optimization to link building and technical SEO, we cover all aspects of search engine optimization.',
+                    fullDescription: 'Our SEO optimization services combine technical expertise with strategic content development to improve your search engine rankings and drive sustainable organic growth. We implement comprehensive SEO strategies that deliver long-term results and measurable business impact.',
                     icon: 'fa-search',
                     cardImage: 'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                     galleryImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
                     backgroundSlides: [
                         'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+                        'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
                     ],
                     galleryDescription: 'Strategic SEO optimization for business growth and search engine visibility.',
                     highlights: [
@@ -2989,16 +3511,6 @@
                             title: 'Content Strategy',
                             description: 'Strategic content development for improved rankings and user engagement.',
                             duration: 'Ongoing'
-                        },
-                        {
-                            title: 'Keyword Research',
-                            description: 'In-depth keyword analysis and targeting for maximum search visibility.',
-                            duration: '1-2 weeks'
-                        },
-                        {
-                            title: 'Link Building',
-                            description: 'Strategic link acquisition for domain authority and search rankings.',
-                            duration: 'Ongoing'
                         }
                     ]
                 },
@@ -3007,19 +3519,13 @@
                     title: 'E-commerce Solutions',
                     description: 'Advanced e-commerce platforms that drive online sales and business growth through optimized shopping experiences.',
                     overview: 'Complete e-commerce solutions for online business success and revenue growth.',
-                    fullDescription: 'Our e-commerce solutions provide comprehensive online selling platforms that combine advanced technology with strategic business insights. We build scalable, secure, and high-performance e-commerce solutions that drive sales growth and enhance customer experience. From platform selection and development to payment integration and inventory management, we handle every aspect of your e-commerce business.',
+                    fullDescription: 'Our e-commerce solutions provide comprehensive online selling platforms that combine advanced technology with strategic business insights. We build scalable, secure, and high-performance e-commerce solutions that drive sales growth and enhance customer experience.',
                     icon: 'fa-shopping-cart',
                     cardImage: 'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                     galleryImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
                     backgroundSlides: [
                         'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+                        'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
                     ],
                     galleryDescription: 'Advanced e-commerce platforms for online businesses and digital storefronts.',
                     highlights: [
@@ -3032,16 +3538,6 @@
                             title: 'Payment Integration',
                             description: 'Secure payment gateway integration for seamless transactions.',
                             duration: '1-2 weeks'
-                        },
-                        {
-                            title: 'Inventory Management',
-                            description: 'Advanced inventory tracking systems for efficient operations.',
-                            duration: '2-4 weeks'
-                        },
-                        {
-                            title: 'Mobile Commerce',
-                            description: 'Optimized mobile shopping experience for increased conversions.',
-                            duration: '3-6 weeks'
                         }
                     ]
                 },
@@ -3050,19 +3546,13 @@
                     title: 'Social Media Management',
                     description: 'Strategic social media solutions that build brand presence and engagement through creative content and community management.',
                     overview: 'Complete social media management for brand growth and audience engagement.',
-                    fullDescription: 'Our social media management services provide strategic solutions for building brand presence, engaging audiences, and driving business growth through social platforms. We combine creative content development with data-driven strategies to deliver measurable results. From content creation and community management to advertising and analytics, we manage your entire social media presence.',
+                    fullDescription: 'Our social media management services provide strategic solutions for building brand presence, engaging audiences, and driving business growth through social platforms. We combine creative content development with data-driven strategies to deliver measurable results.',
                     icon: 'fa-share-alt',
                     cardImage: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                     galleryImage: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
                     backgroundSlides: [
                         'https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+                        'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
                     ],
                     galleryDescription: 'Comprehensive social media management services for brand growth.',
                     highlights: [
@@ -3075,16 +3565,6 @@
                             title: 'Community Management',
                             description: 'Active engagement and relationship building with your audience.',
                             duration: 'Ongoing'
-                        },
-                        {
-                            title: 'Advertising Campaigns',
-                            description: 'Targeted social media advertising for maximum reach and conversions.',
-                            duration: 'Variable'
-                        },
-                        {
-                            title: 'Performance Analytics',
-                            description: 'Data-driven optimization and reporting for continuous improvement.',
-                            duration: 'Weekly/Monthly'
                         }
                     ]
                 },
@@ -3093,19 +3573,13 @@
                     title: 'Data Analytics',
                     description: 'Advanced analytics solutions that transform data into business insights through visualization and predictive analysis.',
                     overview: 'Data-driven insights for informed business decisions and strategic planning.',
-                    fullDescription: 'Our data analytics services provide advanced solutions for transforming data into actionable business insights. We combine cutting-edge analytics tools with strategic expertise to help businesses make data-driven decisions and drive growth. From business intelligence and data visualization to predictive analytics and performance tracking, we turn your data into a competitive advantage.',
+                    fullDescription: 'Our data analytics services provide advanced solutions for transforming data into actionable business insights. We combine cutting-edge analytics tools with strategic expertise to help businesses make data-driven decisions and drive growth.',
                     icon: 'fa-chart-line',
                     cardImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                     galleryImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
                     backgroundSlides: [
                         'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+                        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
                     ],
                     galleryDescription: 'Advanced data analytics for business intelligence and decision making.',
                     highlights: [
@@ -3118,16 +3592,6 @@
                             title: 'Data Visualization',
                             description: 'Interactive dashboards and reports for easy data interpretation.',
                             duration: '2-4 weeks'
-                        },
-                        {
-                            title: 'Predictive Analytics',
-                            description: 'Advanced forecasting and trend analysis for future planning.',
-                            duration: '4-8 weeks'
-                        },
-                        {
-                            title: 'Performance Tracking',
-                            description: 'KPI monitoring and optimization for business growth.',
-                            duration: 'Ongoing'
                         }
                     ]
                 }
@@ -3366,6 +3830,21 @@
                 $scope.closeContactModal();
             };
             
+            // Mobile menu functions
+            $scope.toggleMobileMenu = function() {
+                $scope.mobileMenuOpen = !$scope.mobileMenuOpen;
+                if ($scope.mobileMenuOpen) {
+                    $document.find('body').css('overflow', 'hidden');
+                } else {
+                    $document.find('body').css('overflow', 'auto');
+                }
+            };
+            
+            $scope.closeMobileMenu = function() {
+                $scope.mobileMenuOpen = false;
+                $document.find('body').css('overflow', 'auto');
+            };
+            
             // Gallery slide navigation
             $scope.nextGallerySlide = function() {
                 $scope.previousGallerySlide = $scope.activeGallerySlide;
@@ -3405,8 +3884,26 @@
                 $scope.windowWidth = $window.innerWidth;
                 if ($scope.windowWidth > 768) {
                     $scope.mobileMenuOpen = false;
+                    $document.find('body').css('overflow', 'auto');
                 }
                 $scope.$apply();
+            });
+            
+            // Touch events for mobile
+            angular.element(document).bind('touchstart', function(e) {
+                // Close mobile menu when clicking outside
+                if ($scope.mobileMenuOpen && !e.target.closest('.mobile-menu-content') && !e.target.closest('.mobile-menu-btn')) {
+                    $scope.$apply(function() {
+                        $scope.closeMobileMenu();
+                    });
+                }
+                
+                // Close contact modal when clicking outside
+                if ($scope.showContactInfo && !e.target.closest('.contact-modal-content') && !e.target.closest('.book-consultation-btn')) {
+                    $scope.$apply(function() {
+                        $scope.closeContactModal();
+                    });
+                }
             });
             
             // Smooth scroll function
@@ -3414,17 +3911,13 @@
                 const element = document.getElementById(sectionId);
                 if (element) {
                     $window.scrollTo({
-                        top: element.offsetTop - 100,
+                        top: element.offsetTop - 80,
                         behavior: 'smooth'
                     });
                     $scope.activeSection = sectionId;
                     $scope.mobileMenuOpen = false;
+                    $document.find('body').css('overflow', 'auto');
                 }
-            };
-            
-            // Mobile menu toggle
-            $scope.toggleMobileMenu = function() {
-                $scope.mobileMenuOpen = !$scope.mobileMenuOpen;
             };
             
             // View service details
@@ -3434,6 +3927,7 @@
                 $scope.mobileMenuOpen = false;
                 $scope.currentServiceSlide = 0;
                 $window.scrollTo({ top: 0, behavior: 'smooth' });
+                $document.find('body').css('overflow', 'auto');
                 
                 // Update form data with selected service
                 $scope.formData.service = service.title;
@@ -3455,11 +3949,6 @@
                 
                 // Reset page title
                 document.title = 'Digital Solutions | Professional Digital Marketing, Web Development & SEO Services';
-            };
-            
-            // Show process step details
-            $scope.showProcessStep = function(step) {
-                $scope.showContactModal();
             };
             
             // Form submission
@@ -3510,13 +3999,55 @@
                         $scope.hasUnreadMessages = true;
                     }, 10000);
                 }
-            }, 1000);
+                
+                // Add CSS for screen readers
+                const style = document.createElement('style');
+                style.textContent = `
+                    .sr-only {
+                        position: absolute;
+                        width: 1px;
+                        height: 1px;
+                        padding: 0;
+                        margin: -1px;
+                        overflow: hidden;
+                        clip: rect(0, 0, 0, 0);
+                        white-space: nowrap;
+                        border: 0;
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Add keyboard navigation support
+                document.addEventListener('keydown', function(e) {
+                    // Escape key closes modals
+                    if (e.key === 'Escape') {
+                        if ($scope.mobileMenuOpen) {
+                            $scope.$apply(function() {
+                                $scope.closeMobileMenu();
+                            });
+                        }
+                        if ($scope.showContactInfo) {
+                            $scope.$apply(function() {
+                                $scope.closeContactModal();
+                            });
+                        }
+                        if ($scope.chatbotActive) {
+                            $scope.$apply(function() {
+                                $scope.toggleChatbot();
+                            });
+                        }
+                    }
+                });
+            }, 100);
             
             // Clean up on destroy
             $scope.$on('$destroy', function() {
                 stopHeroBackgroundRotation();
                 stopGalleryRotation();
                 stopServiceBackgroundRotation();
+                angular.element($window).unbind('scroll');
+                angular.element($window).unbind('resize');
+                angular.element(document).unbind('touchstart');
             });
         }]);
     </script>
